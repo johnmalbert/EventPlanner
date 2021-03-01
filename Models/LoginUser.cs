@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Scema;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EventPlanner.Models
 {
