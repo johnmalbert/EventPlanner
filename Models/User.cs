@@ -36,6 +36,8 @@ namespace EventPlanner.Models
         [Compare("Password", ErrorMessage="Password and Confirmation must match.")]
         [DataType(DataType.Password)]
         public string Confirm {get; set;}
+
+        public List<Event> createdEvents {get;set;}
         public DateTime CreatedAt {get; set; } = DateTime.Now;
         public DateTime UpdatedAt {get; set; } = DateTime.Now;
     }
