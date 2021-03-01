@@ -37,7 +37,6 @@ namespace EventPlanner.Controllers
         [HttpGet("event/new")]
         public IActionResult NewEvent()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
             return View();
         }
 
