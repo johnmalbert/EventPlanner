@@ -28,8 +28,7 @@
                     <td>@vent.Duration @vent.HoursOrDays</td>
                     <td>@vent.Creator.FirstName</td>
                     <td></td>
-                </tr>
-                if (vent.Creator.UserId == ViewBag.me)
+                @if (vent.Creator.UserId == ViewBag.me.UserId)
             
                 {
                     <td><a href="/delete/@vent.EventId">Delete</a></td>
@@ -37,6 +36,7 @@
                 else if (vent.Guests.Any(id => id.UserId == ViewBag.me.UserId)){
                     <td><a href="/join/@vent.EventId">Join</a></td>
                 }
+                </tr>
         }
         }
     </tbody>

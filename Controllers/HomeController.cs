@@ -119,7 +119,7 @@ namespace EventPlanner.Controllers
                 Console.WriteLine($"Created event {newEvent.Title}");
                 _context.Add(newEvent);
                 _context.SaveChanges();
-                return Redirect("/event/{newEvent.EventId}");
+                return RedirectToAction("DisplayEvent", new {EventId = newEvent.EventId});
             }
             else
             {
@@ -128,7 +128,7 @@ namespace EventPlanner.Controllers
                 return View("NewEvent");
             }
             // route to the new event ID 
-            return RedirectToAction("Dashboard");
+            // return RedirectToAction("Dashboard");
         }
 
         [HttpGet("event/{EventId}")]
