@@ -34,22 +34,24 @@
       <div class="row border border-right-0 border-bottom-0">
         
         @for(var x = 1; x<=Calstart;x++){
-        <div class ='day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted'>
+          DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month-1,ViewBag.LastMonth-(Calstart-x));
+          <div class ='day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted'>
           <h5 class="row align-items-center">
               <span class="date col-1">@(ViewBag.LastMonth-(Calstart-x))</span>
-            <small class="col d-sm-none text-center text-muted">Sunday</small>
+            <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
           <p class="d-sm-none">No events</p>
         </div> 
         }
         @for(var y = 1; y<=(7-Calstart); y++){
+            DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month,day);
         <div
           class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
           <h5 class="row align-items-center">
               <span class="date col-1">@day</span>
               @{day++;}
-              <small class="col d-sm-none text-center text-muted">Monday</small>
+              <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
           <p class="d-sm-none">No events</p>
@@ -60,25 +62,26 @@
       <div class="row border border-right-0 border-bottom-0">
     @for(var week = 1; week<=7; week++){
     @if(day<=ViewBag.Month){
+      DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month,day);
 
       <div
         class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
         <h5 class="row align-items-center">
           <span class="date col-1">@day</span>
           @{day++;}
-          <small class="col d-sm-none text-center text-muted">Sunday</small>
+          <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
           <span class="col-1"></span>
         </h5>
         <p class="d-sm-none">No events</p>
       </div>
     } else {
-
+      DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month+1,nextmonth);
       <div
         class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
         <h5 class="row align-items-center">
           <span class="date col-1">@nextmonth</span>
           @{nextmonth++;}
-          <small class="col d-sm-none text-center text-muted">Sunday</small>
+          <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
           <span class="col-1"></span>
         </h5>
         <p class="d-sm-none">No events</p>
