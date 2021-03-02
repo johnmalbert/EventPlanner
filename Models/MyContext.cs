@@ -7,6 +7,7 @@ namespace EventPlanner.Models
         public DbSet<User> Users { get; set; }
 
         public DbSet<Event> Events {get;set;}
+        public DbSet<Time> Times {get;set;}
 
         //add events
 
