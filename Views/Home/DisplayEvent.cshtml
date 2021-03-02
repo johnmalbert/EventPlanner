@@ -3,5 +3,12 @@
     ViewData["Title"] = "Event Page";
 }
 
-<h1>This will show a single event</h1>
+@* ViewBag.CurrentUser *@
+@* ViewBag.CurrentEvent *@
+
+<h1 class="display-4 text-center">@ViewBag.CurrentEvent.Title</h1>
+
+<div class="container">
+    <h2>@ViewBag.CurrentEvent.Location</h2>
+</div>
 
