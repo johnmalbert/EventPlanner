@@ -10,12 +10,12 @@ namespace EventPlanner.Models
         [Key]
         public int FriendId {get;set;}
 
-        public User User1 {get;set;}
-        public int User1Id {get;set;}
+        public int UserId {get;set;}
+        public User User {get;set;}
 
 
-        public User User2 {get;set;}
-        public int User2Id {get;set;}
+        public int TargetId {get;set;}
+
     
         // Status will be to show whether the link is an invite
         // or if the link is accepted. (I.e. 1 = invite, 2 = accepted, 0 = declined)
