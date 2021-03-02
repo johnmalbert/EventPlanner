@@ -37,6 +37,8 @@ namespace EventPlanner.Models
         [DataType(DataType.Password)]
         public string Confirm {get; set;}
 
+        public List<Time> FreeTimes {get;set;}
+
         public List<Event> createdEvents {get;set;}
         public DateTime CreatedAt {get; set; } = DateTime.Now;
         public DateTime UpdatedAt {get; set; } = DateTime.Now;
