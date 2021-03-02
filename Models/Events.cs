@@ -22,7 +22,7 @@ namespace EventPlanner.Models
         public string Location {get;set;}
 
         // public string[] Items {get;set;}
-        // public string[] Guests {get;set;}
+        public List<Link> Guests {get;set;}
 
         public int UserId {get;set;}
         public User Creator {get;set;}
