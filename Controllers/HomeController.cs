@@ -159,5 +159,11 @@ namespace EventPlanner.Controllers
             User CurrentUser = _context.Users.First(u => u.UserId == UserId);
             return CurrentUser;
         }
+        [HttpGet("logout")]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index");
+        }
     }
 }
