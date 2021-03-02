@@ -113,10 +113,12 @@ namespace EventPlanner.Controllers
         public IActionResult CreateEvent(Event newEvent)
         {
             Console.WriteLine("Created a new event");
+            User CurrentUser = LoggedUser();
             if(ModelState.IsValid)
             {
                 //add the event to the database
                 Console.WriteLine($"Created event {newEvent.Title}");
+                newEvent.Creator = CurrentUser;
                 _context.Add(newEvent);
                 _context.SaveChanges();
                 return RedirectToAction("DisplayEvent", new {EventId = newEvent.EventId});

@@ -23,7 +23,7 @@
             foreach (Event vent in ViewBag.Events)
             {
                 <tr>
-                    <td><a href="activity/@vent.EventId">@vent.Title</a></td>
+                    <td><a href="event/@vent.EventId">@vent.Title</a></td>
                     <td>@vent.ScheduledAt.ToString("MMM dd, yyyy h:mm tt")</td>
                     <td>@vent.Duration @vent.HoursOrDays</td>
                     <td>@vent.Creator.FirstName</td>

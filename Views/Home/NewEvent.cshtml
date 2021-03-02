@@ -17,7 +17,23 @@
         <span asp-validation-for="Location" class="text-danger"></span>
     </div> 
     <div class='form-group'>
-        <input type="hidden" class="form-control" asp-for="UserId" value="@ViewBag.CurrentUser.UserId">
+        <label asp-for="ScheduledAt"></label>
+        <input class="form-control" asp-for="ScheduledAt">      
+        <span asp-validation-for="ScheduledAt" class="text-danger"></span>
+    </div>  
+    <div class='form-group'>
+        <label asp-for="HoursOrDays"></label>
+        <select class="form-select" asp-name="HoursOrDays">
+            <option selected>Select hours or days</option>
+            <option value="Hours">Hours</option>
+            <option value="Days">Days</option>
+        </select>
+        <span asp-validation-for="HoursOrDays" class="text-danger"></span>
+    </div> 
+    <div class='form-group'>
+        <label asp-for="Duration"></label>
+        <input class="form-control" asp-for="Duration" placeholder= "Enter the event duration">
+        <span asp-validation-for="Duration" class="text-danger"></span>
     </div> 
     <button type="submit" class="btn btn-primary">Enter Event!</button>
     </form>
