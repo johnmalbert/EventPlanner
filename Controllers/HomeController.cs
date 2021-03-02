@@ -89,6 +89,9 @@ namespace EventPlanner.Controllers
         [HttpGet("Dashboard")]
         public IActionResult Dashboard()
         {
+            if(LoggedUser()==null){
+                return RedirectToAction("Index");
+            }
             return View();
         }
 
