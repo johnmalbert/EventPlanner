@@ -18,7 +18,7 @@ namespace EventPlanner.Models
         public string Description {get;set;}
         public int Duration {get;set;}
         // hord => hours or days
-        public string hord {get;set;}
+        public string HoursOrDays {get;set;}
         public string Location {get;set;}
 
         // public string[] Items {get;set;}
