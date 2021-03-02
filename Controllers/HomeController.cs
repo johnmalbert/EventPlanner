@@ -69,6 +69,7 @@ namespace EventPlanner.Controllers
                 if (userInDb == null)
                 {
                     ModelState.AddModelError("Email", "Invalide Email/Password");
+                    ModelState.AddModelError("Email", "Invalid Email/Password");
                     return View("Login");
 
                 }
@@ -76,7 +77,7 @@ namespace EventPlanner.Controllers
                 var result = hasher.VerifyHashedPassword(userSubmission, userInDb.Password, userSubmission.LoginPassword);
                 if (result == 0)
                 {
-                    ModelState.AddModelError("Email", "Invalide Email/Password");
+                    ModelState.AddModelError("Email", "Invalid Email/Password");
                     return View("Login");
                 }
                 HttpContext.Session.SetInt32("LoggedUser", userInDb.UserId);
@@ -94,6 +95,10 @@ namespace EventPlanner.Controllers
         [HttpGet("event/new")]
         public IActionResult NewEvent()
         {
+            if(LoggedUser() == null)
+            {
+                return RedirectToAction("Index");
+            }
             //get current user
             ViewBag.CurrentUser = LoggedUser();
             return View();
@@ -106,8 +111,7 @@ namespace EventPlanner.Controllers
             if(ModelState.IsValid)
             {
                 //add the event to the database
-                Console.WriteLine($"Created event {newEvent.Title}");
-                
+                Console.WriteLine($"Created event {newEvent.Title}");                
             }
             else
             {
@@ -116,7 +120,7 @@ namespace EventPlanner.Controllers
                 return View("NewEvent");
             }
             // route to the new event ID 
-            return RedirectToAction("DisplayEvent", 1);
+            return RedirectToAction("Dashboard");
         }
 
         [HttpGet("event/{EventId}")]
@@ -131,7 +135,7 @@ namespace EventPlanner.Controllers
             return View();
         }
 
-        public User LoggedUser()
+        public User LoggedUser() // this will return null if the user isn't logged in.
         {
             int? UserId = HttpContext.Session.GetInt32("LoggedUser");
 

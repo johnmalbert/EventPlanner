@@ -1,4 +1,4 @@
-@model User
+@model LoginUser
 @{
     ViewData["Title"] = "Login";
 }
@@ -6,21 +6,21 @@
 <h1>THIS IS THE Login page</h1>
         <div class="col-4 ml-3">
             <h2>Login</h2>
-            <form asp-action="logging" asp-controller="Home" method="POST">
+            <form asp-action="Logging" asp-controller="Home" method="POST">
                 <div class="row mt-4 align-items-end">
                     <div class="col border border-dark p-3">
                         <div class="form-group row">
                             <label class="col-sm-4 col-form-label" asp-for="Email"></label>
                             <div class="col-sm-7">
-                                <span asp-validation-for="Email"></span>
                                 <input class="form-control" asp-for="Email">
+                                <span class="text-danger" asp-validation-for="Email"></span>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" asp-for="Password"></label>
+                            <label class="col-sm-4 col-form-label" asp-for="LoginPassword"></label>
                             <div class="col-sm-7">
-                                <span asp-validation-for="Password"></span>
-                                <input class="form-control" asp-for="Password">
+                                <input class="form-control" asp-for="LoginPassword">
+                                <span class="text-danger" asp-validation-for="LoginPassword"></span>
                             </div>
                         </div>
                         <button class="row ml-auto mr-3" type="submit">Login</button>
