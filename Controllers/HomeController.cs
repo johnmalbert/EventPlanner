@@ -94,7 +94,29 @@ namespace EventPlanner.Controllers
         [HttpGet("event/new")]
         public IActionResult NewEvent()
         {
+            //get current user
+            ViewBag.CurrentUser = LoggedUser();
             return View();
+        }
+
+        [HttpPost("event/create")]
+        public IActionResult CreateEvent(Event newEvent)
+        {
+            Console.WriteLine("Created a new event");
+            if(ModelState.IsValid)
+            {
+                //add the event to the database
+                Console.WriteLine($"Created event {newEvent.Title}");
+                
+            }
+            else
+            {
+                //return the view to correct errors
+                Console.WriteLine("Not valid.");
+                return View("NewEvent");
+            }
+            // route to the new event ID 
+            return RedirectToAction("DisplayEvent", 1);
         }
 
         [HttpGet("event/{EventId}")]
@@ -107,6 +129,17 @@ namespace EventPlanner.Controllers
         public IActionResult Invitation(int EventId)
         {
             return View();
+        }
+
+        public User LoggedUser()
+        {
+            int? UserId = HttpContext.Session.GetInt32("LoggedUser");
+
+            if (UserId == null) //user isn't logged in.
+                return null;
+
+            User CurrentUser = _context.Users.First(u => u.UserId == UserId);
+            return CurrentUser;
         }
     }
 }

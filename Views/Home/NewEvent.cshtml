@@ -1,5 +1,24 @@
 @{
     ViewData["Title"] = "New Event";
 }
+@model Event
 
-<h1>THIS WILL SHOW A FORM FOR NEW EVENTS</h1>
+<h1>Create a new event!</h1>
+<div class="container">
+    <form action="/event/create" method="post">
+    <div class='form-group'>
+        <label asp-for="Title"></label>
+        <input class="form-control" asp-for="Title" placeholder= "Enter the name of your event">
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>  
+    <div class='form-group'>
+        <label asp-for="Location"></label>
+        <input class="form-control" asp-for="Location" placeholder= "Please enter a valid location">
+        <span asp-validation-for="Location" class="text-danger"></span>
+    </div> 
+    <div class='form-group'>
+        <input type="hidden" class="form-control" asp-for="UserId" value="@ViewBag.CurrentUser.UserId">
+    </div> 
+    <button type="submit" class="btn btn-primary">Enter Event!</button>
+    </form>
+</div>
