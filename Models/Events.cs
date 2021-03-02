@@ -9,6 +9,7 @@ namespace EventPlanner.Models
     {
         [Key]
         public int EventId {get;set;}
+
         [Required]
         public string Title {get;set;}
         public string Location {get;set;}
