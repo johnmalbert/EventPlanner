@@ -92,6 +92,8 @@ namespace EventPlanner.Controllers
             if(LoggedUser()==null){
                 return RedirectToAction("Index");
             }
+            ViewBag.Events = _context.Events.Include(u => u.Creator).Include(g => g.Guests).OrderBy(time => time.ScheduledAt);
+            ViewBag.me = LoggedUser();
             return View();
         }
 

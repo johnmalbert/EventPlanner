@@ -6,3 +6,37 @@
 <p>
     (your created events, upcoming events you RSVPd to)
 </p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Date and Time</th>
+            <th scope="col">Duration</th>
+            <th scope="col">Creator</th>
+            <th scope="col">Number of Participants</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (Event vent in ViewBag.Events)
+            {
+                <tr>
+                    <td><a href="activity/@vent.EventId">@vent.Title</a></td>
+                    <td>@vent.ScheduledAt.ToString("MMM dd, yyyy h:mm tt")</td>
+                    <td>@vent.Duration @vent.HoursOrDays</td>
+                    <td>@vent.Creator.FirstName</td>
+                    <td></td>
+                </tr>
+                if (vent.Creator.UserId == ViewBag.me)
+                {
+                    <td><a href="/delete/@vent.EventId">Delete</a></td>
+                }
+                else if (vent.Guests.Any(id => id.UserId == ViewBag.me.UserId)){
+                    <td><a href="/join/@vent.EventId">Join</a></td>
+                }
+        }
+        }
+    </tbody>
+</table>
