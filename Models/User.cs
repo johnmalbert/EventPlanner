@@ -37,7 +37,11 @@ namespace EventPlanner.Models
         [DataType(DataType.Password)]
         public string Confirm {get; set;}
 
+        // One-to-Many relationship showcasing when the User has time available
         public List<Time> FreeTimes {get;set;}
+
+        //Many-to-Many relationship between users
+        public List<Friend> Friends {get;set;}
 
         public List<Event> createdEvents {get;set;}
         public DateTime CreatedAt {get; set; } = DateTime.Now;
