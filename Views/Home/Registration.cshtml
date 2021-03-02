@@ -1,0 +1,54 @@
+@model User
+@{
+    ViewData["Title"] = "Home Page";
+}
+<a href="/dashboard">Dashboard</a>
+<a href="/event/new">Event Form</a>
+<a href="/event/1">Single event page</a>
+<a href="/invitation/1">Invitation View</a>
+<a href="/registration">Login/Reg</a>
+<div class="container-fluid ">
+    <div class="row justify-content-center">
+        <form class="col-4" asp-action="Register" asp-controller="Home" method="post">
+            <h2>Register</h2>
+            <div class="row mt-4 align-items-end">
+                <div class="col border border-dark p-3">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" asp-for="FirstName"></label>
+                        <div class="col-sm-7">
+                            <span asp-validation-for="FirstName"></span>
+                            <input class="form-control" asp-for="FirstName">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" asp-for="LastName"></label>
+                        <div class="col-sm-7">
+                            <span asp-validation-for="LastName"></span>
+                            <input class="form-control" asp-for="LastName">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" asp-for="Email"></label>
+                        <div class="col-sm-7">
+                            <span asp-validation-for="Email"></span>
+                            <input class="form-control" asp-for="Email">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" asp-for="Password"></label>
+                        <div class="col-sm-7">
+                            <span asp-validation-for="Password"></span>
+                            <input class="form-control" asp-for="Password">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label" asp-for="Confirm">Confirm Password: </label>
+                        <div class="col-sm-7">
+                            <span asp-validation-for="Confirm"></span>
+                            <input class="form-control" asp-for="Confirm">
+                        </div>
+                    </div>
+                    <button class="row ml-auto mr-3" type="submit">Register</button>
+                </div>
+            </div>
+        </form>

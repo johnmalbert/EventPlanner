@@ -33,6 +33,33 @@ namespace EventPlanner.Controllers
         {
             return View();
         }
+        [HttpGet("registration")]
+        public IActionResult Registration(){
+            return View();
+        }
+
+        // Register is what processess the register form
+        // if registration is valid saves the UserId under LoggedUser
+        [HttpPost("register")]
+        public IActionResult Register(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                if (_context.Users.Any(u => u.Email == user.Email))
+                {
+                    ModelState.AddModelError("Email", "Email is already in user");
+                    return View("Index");
+                }
+
+                PasswordHasher<User> Hasher = new PasswordHasher<User>();
+                user.Password = Hasher.HashPassword(user, user.Password);
+                _context.Add(user);
+                _context.SaveChanges();
+                HttpContext.Session.SetInt32("LoggedUser", user.UserId);
+                return RedirectToAction("Dashboard");
+            }
+            return View("Index");
+        }
 
         [HttpGet("event/new")]
         public IActionResult NewEvent()
