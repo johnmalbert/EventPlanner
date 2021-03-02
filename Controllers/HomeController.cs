@@ -94,6 +94,10 @@ namespace EventPlanner.Controllers
             }
             ViewBag.Events = _context.Events.Include(u => u.Creator).Include(g => g.Guests).OrderBy(time => time.ScheduledAt);
             ViewBag.me = LoggedUser();
+            ViewBag.Me = _context.Users.Include(t => t.FreeTimes).FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser"));
+            ViewBag.LastMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month-1);
+            ViewBag.Month = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
+            ViewBag.StartCal = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             return View();
         }
 
