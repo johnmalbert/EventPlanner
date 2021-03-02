@@ -114,7 +114,10 @@ namespace EventPlanner.Controllers
             if(ModelState.IsValid)
             {
                 //add the event to the database
-                Console.WriteLine($"Created event {newEvent.Title}");                
+                Console.WriteLine($"Created event {newEvent.Title}");
+                _context.Add(newEvent);
+                _context.SaveChanges();
+                return Redirect("/event/{newEvent.EventId}");
             }
             else
             {
@@ -129,6 +132,12 @@ namespace EventPlanner.Controllers
         [HttpGet("event/{EventId}")]
         public IActionResult DisplayEvent(int EventId)
         {
+            //see if user is logged in
+            ViewBag.CurrentUser = LoggedUser();
+            if(ViewBag.CurrentUser == null) //send back to index if not logged in.
+                return RedirectToAction("Index");
+            
+            ViewBag.CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == EventId);
             return View();
         }
 
