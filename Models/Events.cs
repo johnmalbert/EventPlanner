@@ -12,6 +12,13 @@ namespace EventPlanner.Models
 
         [Required]
         public string Title {get;set;}
+        [Required]
+        public DateTime ScheduledAt {get;set;}
+        public DateTime EndAt {get;set;}
+        public string Description {get;set;}
+        public int Duration {get;set;}
+        // hord => hours or days
+        public string hord {get;set;}
         public string Location {get;set;}
 
         // public string[] Items {get;set;}
