@@ -1,6 +1,6 @@
 @model Time
 @{
-  ViewData["Title"] = "Dashboard";
+    ViewData["Title"] = "Dashboard";
 }
 <form action="findFriend" method="POST">
     <label name="search">Search for Friend using their email</label>
@@ -9,10 +9,8 @@
 </form>
 <table class="table mt-5">
     <thead>
-        <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Status</th>
-        </tr>
+        <tr><th><h4>Requests</h4></th></tr>
+        
     </thead>
     <tbody>
         @foreach (var fri in ViewBag.Invites)
@@ -23,18 +21,31 @@
                 <td><a href="deny">Reject</a></td>
             </tr>
         }
+    </tbody>
+    </table>
+    <table class="table mt-5">
+
+    <thead>
+        <tr><th><h4>Friends</h4></th></tr>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
         @foreach (var fr in ViewBag.Friends)
         {
             <tr>
                 <td>@fr.User.FirstName</td>
-                @if(fr.Status == 1){
+                @if (fr.Status == 1)
+                {
                     <td>Invited</td>
                 }
-                @if(fr.Status == 2){
+                @if (fr.Status == 2)
+                {
                     <td>Friends</td>
                 }
             </tr>
         }
     </tbody>
 </table>
-
