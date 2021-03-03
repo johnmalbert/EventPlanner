@@ -10,6 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.IO;  
+using System.Net;  
+using System.Net.Mail;  
+using System.Text;
 
 namespace EventPlanner.Controllers
 {
@@ -101,11 +105,39 @@ namespace EventPlanner.Controllers
                 TimeToSendReminder = setReminder
             };
             _context.Add(newReminder);
+            Console.WriteLine($"From: {newReminder.from} pw {newReminder.PW}");
+            SendReminder(newReminder);
             _context.SaveChanges();
 
             Console.WriteLine($"Reminder will be sent to {newReminder.to}, set for {newReminder.TimeToSendReminder}");
 
             return Redirect($"/reminder/{CurrentEvent.EventId}");
+        }
+        public void SendReminder(Reminder reminder)
+        {
+            MailMessage message = new MailMessage(reminder.from, reminder.to);
+            message.Subject = reminder.MesssageSubject;
+            message.Body = reminder.MessageBody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            System.Net.NetworkCredential basicCredential1 = new System.Net.NetworkCredential(reminder.from, reminder.PW);
+            client.EnableSsl = true;  
+            client.UseDefaultCredentials = false;  
+            client.Credentials = basicCredential1;  
+            try   
+            {  
+                client.Send(message);
+                Reminder reminderToDelete = _context.Reminders.FirstOrDefault(r => r == reminder);
+                _context.Remove(reminderToDelete);
+                _context.SaveChanges();
+            }   
+            
+            catch (Exception ex)
+            {  
+                Console.WriteLine("Reminder not sent!");
+                throw ex;  
+            }
         }
     }
 }
