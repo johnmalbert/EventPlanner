@@ -1,0 +1,29 @@
+@model Event
+@{
+    ViewData["Title"] = "Set Reminders";
+}
+<div class="container">
+    <h1 class="display-4 text-center">Setup Email Reminders</h1>
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Date</th>
+            <th scope="col">Time</th>
+            <th scope="col">Setup Reminder</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Event item in @ViewBag.Events)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>@item.ScheduledAt.ToString("d")</td>
+                <td>@item.ScheduledAt.ToString("hh:mm")</td>
+                <td><a href="/reminder/@item.EventId" class="btn btn-primary">Set Reminder</a></td>            
+            </tr>
+        }
+    </tbody>
+</table>
+
+</div>
