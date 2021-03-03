@@ -1,0 +1,40 @@
+@model Time
+@{
+  ViewData["Title"] = "Dashboard";
+}
+<form action="findFriend" method="POST">
+    <label name="search">Search for Friend using their email</label>
+    <input type="text" name="search">
+    <button type="submit">Search</button>
+</form>
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fri in ViewBag.Invites)
+        {
+            <tr>
+                <td>@fri.User.FirstName</td>
+                <td><a href="confirm/@fri.UserId">Accept</a></td>
+                <td><a href="deny">Reject</a></td>
+            </tr>
+        }
+        @foreach (var fr in ViewBag.Friends)
+        {
+            <tr>
+                <td>@fr.User.FirstName</td>
+                @if(fr.Status == 1){
+                    <td>Invited</td>
+                }
+                @if(fr.Status == 2){
+                    <td>Friends</td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -74,7 +74,7 @@ namespace EventPlanner.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Friend");
+                    b.ToTable("Friends");
                 });
 
             modelBuilder.Entity("EventPlanner.Models.Link", b =>
