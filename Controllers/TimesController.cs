@@ -42,5 +42,40 @@ namespace EventPlanner.Controllers
             }
             return View("ViewAvailability");
         }
+        [HttpGet("viewFriends")]
+        public IActionResult ViewFriends(){
+            if(HttpContext.Session.GetInt32("LoggedUser") == null)
+            {
+                return Redirect("/");
+            }
+            ViewBag.Friends = _context.Friends.Include(u => u.User).Where(t => t.TargetId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 2);
+            ViewBag.ISent = _context.Friends.Include(u => u.User).Where(t => t.UserId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 1);
+            ViewBag.Invites = _context.Friends.Include(u => u.User).Where(t => t.TargetId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 1);
+            return View();
+        }
+        [HttpPost("findFriend")]
+        public IActionResult FindFriend(string search){
+            User searchedfor = _context.Users.FirstOrDefault(u => u.Email == search);
+            if(searchedfor == null){
+                return RedirectToAction("ViewFriends");
+            }
+            Friend link = _context.Friends.FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser") && u.TargetId == searchedfor.UserId);
+            if(link == null){
+                Friend NewFriend = new Friend(){ UserId = (int)HttpContext.Session.GetInt32("LoggedUser"), TargetId = searchedfor.UserId};
+                _context.Add(NewFriend);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("ViewFriends");
+        }
+        [HttpGet("confirm/{id}")]
+        public IActionResult Confirm(int id){
+            Friend NewFriend = new Friend(){ UserId = (int)HttpContext.Session.GetInt32("LoggedUser"), TargetId = id};
+            NewFriend.Status = 2;
+            Friend Accepted = _context.Friends.FirstOrDefault(u => u.TargetId == (int)HttpContext.Session.GetInt32("LoggedUser") && u.UserId == id);
+            Accepted.Status = 2;
+            _context.Add(NewFriend);
+            _context.SaveChanges();
+            return RedirectToAction("ViewFriends");
+        }
     }
 }
