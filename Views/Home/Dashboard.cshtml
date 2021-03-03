@@ -41,8 +41,17 @@
             <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
-          <p class="d-sm-none">No events</p>
-        </div> 
+          @foreach (var vent in ViewBag.Events)
+          {
+              if(vent.ScheduledAt.Date == thisDay.Date){
+                
+                <p class="d-sm">@vent.Title</p>
+              } else {
+
+                <p class="d-sm-none">No events</p>
+              }
+          }
+          </div> 
         }
         @for(var y = 1; y<=(7-Calstart); y++){
             DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month,day);
@@ -54,8 +63,17 @@
               <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
-          <p class="d-sm-none">No events</p>
-        </div>
+          @foreach (var vent in ViewBag.Events)
+          {
+              if(vent.ScheduledAt.Date == thisDay.Date){
+                
+                <p class="d-sm">@vent.Title</p>
+              } else {
+
+                <p class="d-sm-none">No events</p>
+              }
+          }
+          </div>
         }
       </div>
     }
@@ -72,8 +90,17 @@
           <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
           <span class="col-1"></span>
         </h5>
-        <p class="d-sm-none">No events</p>
-      </div>
+          @foreach (var vent in ViewBag.Events)
+          {
+              if(vent.ScheduledAt.Date == thisDay.Date){
+                
+                <p class="d-sm">@vent.Title</p>
+              } else {
+
+                <p class="d-sm-none">No events</p>
+              }
+          }
+          </div>
     } else {
       DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month+1,nextmonth);
       <div
@@ -84,8 +111,17 @@
           <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
           <span class="col-1"></span>
         </h5>
-        <p class="d-sm-none">No events</p>
-      </div>
+          @foreach (var vent in ViewBag.Events)
+          {
+              if(vent.ScheduledAt.Date == thisDay.Date){
+                
+                <p class="d-sm">@vent.Title</p>
+              } else {
+
+                <p class="d-sm-none">No events</p>
+              }
+          }
+          </div>
         
     }
         
