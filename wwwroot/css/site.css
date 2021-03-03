@@ -1,27 +1,47 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+:root {
+  --primary: #04202C;
+  --secondary: #304040;
+  --third: #5B7065;
+  --fourth: #C9D1C8;
+}
+
+header {
+  background-color: var(--secondary);
+  color: var(--fourth);
+}
+
+body {
+  background-color: var(--primary);
+  color: var(--fourth);
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
 }
 
-/* Provide sufficient contrast against white background */
 a {
-  color: #0366d6;
+  color: var(--fourth);
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  color: var(--fourth);
+  background-color: var(--third);
+  border-color: var(--third);
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  color: var(--fourth);
+  background-color: var(--third);
+  border-color: var(--third);
+}
+
+.login-reg-btns {
+  margin: auto 0 auto auto;
 }
 
 /* Sticky footer styles
@@ -36,10 +56,10 @@ html {
 }
 
 .border-top {
-  border-top: 1px solid #e5e5e5;
+  border-top: 1px solid var(--fourth);
 }
 .border-bottom {
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid var(--fourth);
 }
 
 .box-shadow {

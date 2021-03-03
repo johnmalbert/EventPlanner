@@ -10,9 +10,9 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home Page</a>
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Overview</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -37,6 +37,27 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" href="/invitation/{EventId}">Invitation View</a>
                         </li>
+                        <div class="navbar items">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/event/new">Event Form</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/dashboard">Single Event Page</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/viewavailability">Free Time</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/invitation/{EventId}">Invitation View</a>
+                            </li>
+                        </div>
+                        <div class="login-reg-btns">
+                            <a href="/login"><button class="btn btn-primary">Login</button></a>
+                            <a href="/register"><button class="btn btn-primary">Register</button></a>
+                        </div>
                     </ul>
                 </div>
             </div>
