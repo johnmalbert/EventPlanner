@@ -58,6 +58,11 @@ namespace EventPlanner.Controllers
             if(ModelState.IsValid)
             {
                 //add the event to the database
+                if (newEvent.ScheduledAt < DateTime.Now)
+                {
+                    ModelState.AddModelError("ScheduledAt", "Activity must be in the future");
+                    return View("NewEvent");
+                }
                 Console.WriteLine($"Created event {newEvent.Title}");
                 newEvent.Creator = CurrentUser;
                 _context.Add(newEvent);
