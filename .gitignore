@@ -4,6 +4,7 @@
 ###################
 # compiled source #
 ###################
+Migrations
 appsettings.json
 *.com
 *.class
