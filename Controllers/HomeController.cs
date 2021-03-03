@@ -92,6 +92,7 @@ namespace EventPlanner.Controllers
             if(LoggedUser()==null){
                 return RedirectToAction("Index");
             }
+            BestDate();
             ViewBag.Events = _context.Events.Include(u => u.Creator).Include(g => g.Guests).OrderBy(time => time.ScheduledAt);
             ViewBag.me = LoggedUser();
             ViewBag.Me = _context.Users.Include(t => t.FreeTimes).FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser"));
@@ -180,6 +181,25 @@ namespace EventPlanner.Controllers
 
             User CurrentUser = _context.Users.First(u => u.UserId == UserId);
             return CurrentUser;
+        }
+        public Dictionary<DateTime,int> BestDate() // this will return null if the user isn't logged in.
+        {
+            List<DateTime> GoodTimes = new List<DateTime>();
+                foreach( Friend fr in _context.Friends.Include(u =>u.User).ThenInclude(g => g.FreeTimes).Where(t => t.TargetId == LoggedUser().UserId && t.Status ==2)){
+                    foreach(Time gt in fr.User.FreeTimes){
+                            GoodTimes.Add(gt.StartAt);
+                    }
+                }
+            var q = GoodTimes.GroupBy(x => x).Select(g => new {Value = g.Key, Count = g.Count()}).OrderByDescending(x => x.Count);
+            Dictionary<DateTime,int> BestTimes = new Dictionary<DateTime,int>();
+            foreach(var x in q){
+                BestTimes.Add(x.Value,x.Count);
+            }
+            foreach(var l in BestTimes){
+                Console.WriteLine(l.Key);
+                Console.WriteLine(l.Value);
+            }
+            return BestTimes;
         }
         [HttpGet("logout")]
         public IActionResult Logout()
