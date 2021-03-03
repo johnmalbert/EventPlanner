@@ -54,7 +54,16 @@
               <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
-          <p class="d-sm-none">No events</p>
+          @foreach (var time in ViewBag.Me.FreeTimes)
+          {
+              if(time.StartAt.Date == thisDay.Date){
+                
+                <p class="d-sm">Free</p>
+              } else {
+
+                <p class="d-sm-none">No events</p>
+              }
+          }
         </div>
         }
       </div>
@@ -93,8 +102,13 @@
         </div>
     
   }
+  @{
+    foreach(var time in ViewBag.Me.FreeTimes){
+      <h2>@time.StartAt.Date.ToString("MM/dd/yyyy")</h2>
 
-  @* <form class="col-4 mt-5" asp-action="NewTime" asp-controller="Times" method="post">
+    }
+  }
+  <form class="col-4 mt-5" asp-action="NewTime" asp-controller="Times" method="post">
     <h2>Add Free Time</h2>
     <div class="row mt-4 align-items-end">
       <div class="col border border-dark p-3">
@@ -115,4 +129,4 @@
         <button class="row ml-auto mr-3" type="submit">Add to Availability</button>
       </div>
     </div>
-  </form> *@
+  </form>
