@@ -61,6 +61,21 @@ namespace EventPlanner.Controllers
             return View();
         }
 
+        [HttpGet("reminder/all")]
+        public IActionResult AllReminders()
+        {
+            //get current user
+            User CurrentUser = LoggedUser();
+            if(CurrentUser == null)
+                return RedirectToAction("Index");
+            //show all the reminders, sorted by event
+            ViewBag.AllReminders = _context.Reminders
+                .Include(r => r.Event)
+                .OrderBy(r => r.TimeToSendReminder)
+                .ToList();
+            return View();
+        }
+
         [HttpGet("reminder/{reminderId}/delete")]
         public IActionResult DeleteReminder(int reminderId)
         {
@@ -81,6 +96,7 @@ namespace EventPlanner.Controllers
                 return null;
 
             User CurrentUser = _context.Users.First(u => u.UserId == UserId);
+            CheckForReminders();
             return CurrentUser;
         }
 
@@ -99,18 +115,13 @@ namespace EventPlanner.Controllers
             Reminder newReminder = new Reminder{
                 User = CurrentUser,
                 Event = CurrentEvent,
-                MessageBody = $"Hello {CurrentUser.FirstName}, \nYou your event {CurrentEvent.Title} is coming up!",
+                MessageBody = $"Hello {CurrentUser.FirstName}, {Environment.NewLine} Your event {CurrentEvent.Title} is coming up! {Environment.NewLine} Location: {CurrentEvent.Location} {Environment.NewLine} Time: {CurrentEvent.ScheduledAt.ToString()}",
                 MesssageSubject = $"Event Reminder - {CurrentEvent.Title}",
                 to = CurrentUser.Email,
                 TimeToSendReminder = setReminder
             };
             _context.Add(newReminder);
-            Console.WriteLine($"From: {newReminder.from} pw {newReminder.PW}");
-            SendReminder(newReminder);
             _context.SaveChanges();
-
-            Console.WriteLine($"Reminder will be sent to {newReminder.to}, set for {newReminder.TimeToSendReminder}");
-
             return Redirect($"/reminder/{CurrentEvent.EventId}");
         }
         public void SendReminder(Reminder reminder)
@@ -128,15 +139,27 @@ namespace EventPlanner.Controllers
             try   
             {  
                 client.Send(message);
-                Reminder reminderToDelete = _context.Reminders.FirstOrDefault(r => r == reminder);
-                _context.Remove(reminderToDelete);
-                _context.SaveChanges();
-            }   
-            
+            }               
             catch (Exception ex)
             {  
-                Console.WriteLine("Reminder not sent!");
-                throw ex;  
+                Console.WriteLine(ex);
+            }
+
+        }
+        public void CheckForReminders()
+        {
+            //this function will look up each reminder that is due to be sent
+            List<Reminder> remindersToSend = _context.Reminders
+                .Include(r => r.Event)
+                .Where(r => r.TimeToSendReminder < DateTime.Now)
+                .ToList();
+                Console.WriteLine($"There are {remindersToSend.Count} to send");
+            foreach (Reminder item in remindersToSend)
+            {
+                SendReminder(item);
+                var RemToDel = _context.Reminders.First(r => r.ReminderId == item.ReminderId);
+                _context.Remove(item);
+                _context.SaveChanges();
             }
         }
     }
