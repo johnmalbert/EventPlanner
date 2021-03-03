@@ -35,6 +35,9 @@ namespace EventPlanner.Controllers
         [HttpPost("newTime")]
         public IActionResult NewTime(Time newTime){
             if(ModelState.IsValid){
+                if(_context.Times.Any(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser") && u.StartAt == newTime.StartAt)){
+                    return RedirectToAction("ViewAvailability");
+                }
                 newTime.UserId = (int)HttpContext.Session.GetInt32("LoggedUser");
                 _context.Add(newTime);
                 _context.SaveChanges();
