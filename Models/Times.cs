@@ -12,8 +12,6 @@ namespace EventPlanner.Models
 
         public DateTime StartAt {get;set;}
 
-        public DateTime EndAt {get;set;}
-
         public int UserId {get;set;}
         public User User {get;set;}
     }
