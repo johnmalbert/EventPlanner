@@ -3,24 +3,34 @@
     ViewData["Title"] = "Set Reminders";
 }
 <div class="container">
-    <h1 class="display-4 text-center">Setup Email Reminders</h1>
+    <h1 class="display-4 text-center">Your Reminders</h1>
     <table class="table">
     <thead>
         <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">Setup Reminder</th>
+            <th scope="col">Event</th>
+            <th scope="col">Reminder Time</th>
+            <th scope="col">Action</th>
         </tr>
     </thead>
     <tbody>
-            <tr>
-                <td>@ViewBag.CurrentEvent.Title</td>
-                <td>@ViewBag.CurrentEvent.ScheduledAt.ToString("d")</td>
-                <td>@ViewBag.CurrentEvent.ScheduledAt.ToString("hh:mm")</td>
-                <td><a href="/reminder/@ViewBag.CurrentEvent.EventId" class="btn btn-primary">Set Reminder</a></td>            
-            </tr>
+            @foreach (var item in @ViewBag.Reminders)
+            {
+                <tr>
+                    <td>@item.Event.Title</td>
+                    <td>@item.TimeToSendReminder.ToString("MMM dd, yyyy h:mm tt")</td>
+                    <td><a href="/reminder/@item.ReminderId/delete" class="btn btn-danger">Delete Reminder</a></td>
+                </tr>
+            }
     </tbody>
 </table>
-
+    <div class="container text-center">
+        <h1 class="display-4">Create a New Reminder</h1>
+        <form class="form-control" action="/reminder/@ViewBag.CurrentEvent.EventId/create" method="post">
+            <div class='form-group'>
+                <label for="timeBefore">Enter the hours before that you'd like the reminder</label>
+                <input type="number" placeholder= "Enter # of Hours" name="timeBefore">
+            </div> 
+            <button type="submit" class="btn btn-primary">Set Reminder</button>
+        </form>
+    </div>
 </div>

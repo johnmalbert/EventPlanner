@@ -43,6 +43,8 @@ namespace EventPlanner.Models
         //Many-to-Many relationship between users
         public List<Friend> Friends {get;set;}
 
+        public List<Reminder> Reminders { get; set; }
+
         public List<Event> createdEvents {get;set;}
         public DateTime CreatedAt {get; set; } = DateTime.Now;
         public DateTime UpdatedAt {get; set; } = DateTime.Now;

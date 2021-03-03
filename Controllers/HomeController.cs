@@ -154,6 +154,22 @@ namespace EventPlanner.Controllers
         {
             return View();
         }
+        [HttpGet("delete/{eventId}")]
+        public IActionResult DeleteEvent(int EventId)
+        {
+            if(LoggedUser() != null)
+            {
+                //get the event to delete
+                Event eventToDelete = _context.Events.FirstOrDefault(e => e.EventId == EventId);
+                _context.Remove(eventToDelete);
+                _context.SaveChanges();
+                return RedirectToAction("Dashboard");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+        }
 
         public User LoggedUser() // this will return null if the user isn't logged in.
         {
