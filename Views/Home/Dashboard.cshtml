@@ -99,6 +99,7 @@
             <th scope="col">Creator</th>
             <th scope="col">Number of Participants</th>
             <th scope="col">Actions</th>
+            <th scope="col">Set Reminder</th>
         </tr>
     </thead>
     <tbody>
@@ -119,6 +120,7 @@
                 else if (vent.Guests.Any(id => id.UserId == ViewBag.me.UserId)){
                     <td><a href="/join/@vent.EventId">Join</a></td>
                 }
+                  <td><a href="/reminder/@vent.EventId">Set Reminder</a></td>
                 </tr>
         }
         }
