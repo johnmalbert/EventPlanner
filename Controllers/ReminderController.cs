@@ -58,6 +58,31 @@ namespace EventPlanner.Controllers
             User CurrentUser = _context.Users.First(u => u.UserId == UserId);
             return CurrentUser;
         }
+
+        //reminder message function
+        [HttpPost("reminder/{eventNum}/create")]
+        public IActionResult SetReminder(int eventNum, int timeBefore) //amount of time before the event to send reminder
+        {
+            // get current user
+            User CurrentUser = LoggedUser();
+            // get the event for the reminder
+            Event CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == eventNum);
+            //get the time before event to set the reminder
+            TimeSpan timeBeforeSpan = new TimeSpan(0,timeBefore,0,0,0);
+            DateTime setReminder = CurrentEvent.ScheduledAt - timeBeforeSpan;
+            //create a new reminder
+            Reminder newReminder = new Reminder{
+                User = CurrentUser,
+                Event = CurrentEvent,
+                MessageBody = $"Hello {CurrentUser.FirstName}, \nYou your event {CurrentEvent.Title} is coming up!",
+                MesssageSubject = $"Event Reminder - {CurrentEvent.Title}",
+                to = CurrentUser.Email,
+                TimeToSendReminder = setReminder
+            };
+            Console.WriteLine($"Reminder will be sent to {newReminder.to}, set for {newReminder.TimeToSendReminder}");
+
+            return Redirect($"/reminder/{CurrentEvent.EventId}");
+        }
     }
 }
 //jqzeventreminders@gmail.com
