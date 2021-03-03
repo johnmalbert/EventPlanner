@@ -60,3 +60,5 @@ namespace EventPlanner.Controllers
         }
     }
 }
+//jqzeventreminders@gmail.com
+//JQZEvents is the p-w

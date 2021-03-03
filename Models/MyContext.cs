@@ -5,11 +5,9 @@ namespace EventPlanner.Models
     {
         public MyContext(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
-
         public DbSet<Event> Events {get;set;}
         public DbSet<Time> Times {get;set;}
-
-        //add events
+        public DbSet<Reminder> Reminders { get; set; }
 
         // add other models
         

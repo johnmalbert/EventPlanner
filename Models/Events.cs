@@ -26,5 +26,6 @@ namespace EventPlanner.Models
 
         public int UserId {get;set;}
         public User Creator {get;set;}
+        public List<Reminder> Reminders { get; set; }
     }
 }
