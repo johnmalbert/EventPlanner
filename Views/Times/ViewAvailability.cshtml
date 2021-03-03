@@ -41,8 +41,17 @@
             <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
-          <p class="d-sm-none">No events</p>
-        </div> 
+          @foreach (var time in ViewBag.Me.FreeTimes)
+          {
+              if(time.StartAt.Date == thisDay.Date){
+                
+                <p class="d-sm">Free</p>
+              } else {
+
+                <p class="d-sm-none">No events</p>
+              }
+          }
+          </div> 
         }
         @for(var y = 1; y<=(7-Calstart); y++){
             DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month,day);
@@ -81,8 +90,17 @@
           <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
           <span class="col-1"></span>
         </h5>
-        <p class="d-sm-none">No events</p>
-      </div>
+          @foreach (var time in ViewBag.Me.FreeTimes)
+          {
+              if(time.StartAt.Date == thisDay.Date){
+                
+                <p class="d-sm">Free</p>
+              } else {
+
+                <p class="d-sm-none">No events</p>
+              }
+          }
+          </div>
     } else {
       DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month+1,nextmonth);
       <div
@@ -93,8 +111,17 @@
           <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
           <span class="col-1"></span>
         </h5>
-        <p class="d-sm-none">No events</p>
-      </div>
+          @foreach (var time in ViewBag.Me.FreeTimes)
+          {
+              if(time.StartAt.Date == thisDay.Date){
+                
+                <p class="d-sm">Free</p>
+              } else {
+
+                <p class="d-sm-none">No events</p>
+              }
+          }
+          </div>
         
     }
         
@@ -103,8 +130,9 @@
     
   }
   @{
+    <h2>Dates that should say free on calendar</h2>
     foreach(var time in ViewBag.Me.FreeTimes){
-      <h2>@time.StartAt.Date.ToString("MM/dd/yyyy")</h2>
+      <p>@time.StartAt.Date.ToString("MM/dd/yyyy")</p>
 
     }
   }
