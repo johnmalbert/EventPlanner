@@ -26,6 +26,7 @@ namespace EventPlanner.Controllers
             {
                 return Redirect("/");
             }
+            ViewBag.BestDates = BestDate();
             ViewBag.Me = _context.Users.Include(t => t.FreeTimes).FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser"));
             ViewBag.LastMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month-1);
             ViewBag.Month = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month);
@@ -79,6 +80,25 @@ namespace EventPlanner.Controllers
             _context.Add(NewFriend);
             _context.SaveChanges();
             return RedirectToAction("ViewFriends");
+        }
+                public Dictionary<DateTime,int> BestDate() // this will return null if the user isn't logged in.
+        {
+            List<DateTime> GoodTimes = new List<DateTime>();
+                foreach( Friend fr in _context.Friends.Include(u =>u.User).ThenInclude(g => g.FreeTimes).Where(t => t.TargetId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status ==2)){
+                    foreach(Time gt in fr.User.FreeTimes){
+                            GoodTimes.Add(gt.StartAt);
+                    }
+                }
+            var q = GoodTimes.GroupBy(x => x).Select(g => new {Value = g.Key, Count = g.Count()}).OrderByDescending(x => x.Count);
+            Dictionary<DateTime,int> BestTimes = new Dictionary<DateTime,int>();
+            foreach(var x in q){
+                BestTimes.Add(x.Value,x.Count);
+            }
+            foreach(var l in BestTimes){
+                Console.WriteLine(l.Key);
+                Console.WriteLine(l.Value);
+            }
+            return BestTimes;
         }
     }
 }

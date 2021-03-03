@@ -130,9 +130,9 @@
     
   }
   @{
-    <h2>Dates that should say free on calendar</h2>
-    foreach(var time in ViewBag.Me.FreeTimes){
-      <p>@time.StartAt.Date.ToString("MM/dd/yyyy")</p>
+    <h2>Best Dates for Friends</h2>
+    foreach(var date in ViewBag.BestDates){
+      <p>@date.Key.ToString("MM/dd/yyyy") - @date.Value</p>
 
     }
   }
