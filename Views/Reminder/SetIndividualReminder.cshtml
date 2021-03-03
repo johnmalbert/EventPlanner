@@ -22,5 +22,11 @@
             </tr>
     </tbody>
 </table>
-@* Still figuring out how to send emails. *@
+    <form action="/reminder/@ViewBag.CurrentEvent.EventId/create" method="post">
+        <div class='form-group'>
+            <label for="timeBefore">Enter the hours before that you'd like the reminder</label>
+            <input type="number" placeholder= "Enter # of Hours" name="timeBefore">
+        </div> 
+        <button type="submit" class="btn btn-primary">Set Reminder</button>
+    </form>
 </div>
