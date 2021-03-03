@@ -161,7 +161,9 @@ namespace EventPlanner.Controllers
             {
                 //get the event to delete
                 Event eventToDelete = _context.Events.FirstOrDefault(e => e.EventId == EventId);
+                var RemindersToDelete = _context.Reminders.Where(r => r.Event == eventToDelete);
                 _context.Remove(eventToDelete);
+                _context.Remove(RemindersToDelete);
                 _context.SaveChanges();
                 return RedirectToAction("Dashboard");
             }
