@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - EventPlanner</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://kit.fontawesome.com/b6768de308.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="header" role="banner">
+  <h1 class="logo">
+    <a href="/">Overview</a>
+  </h1>
+  <div class="nav-wrap">
+    <nav class="main-nav" role="navigation">
+      <ul class="unstyled list-hover-slide">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="/event/new">Event Form</a></li>
+        <li><a href="/viewavailability">Free Time</a></li>
+        <li><a href="/invitation/{EventId}">Invitation View</a></li>
+      </ul>
+    </nav>
+    <ul class="social-links list-inline unstyled list-hover-slide">
+      <li><a href="#">Twitter</a></li>
+      <li><a href="#">Google+</a></li>
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">CodePen</a></li>
+    </ul>
+  </div>
+</header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Quinn Lathe <a href="https://github.com/QLathe"><i class="fab fa-github"></i></a> - Zack Springer <a href="https://github.com/Springer114"><i class="fab fa-github"></i></a> - John Albert - <a href="https://github.com/johnmalbert"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
