@@ -110,8 +110,8 @@ namespace EventPlanner.Controllers
         [HttpGet("invitation")]
         public IActionResult Invitation()
         {
-            ViewBag.Invites = _context.Invites.Include(u => u.User).Include(e => e.Event).Where( d => d.TargetId == LoggedUser().UserId);
-            ViewBag.RequestInvites = _context.RequestedInvites.Include(u => u.User).Include(e => e.Event).Where( d => d.Requester == LoggedUser().UserId);
+            ViewBag.RequestInvites = _context.Invites.Include(u => u.User).Include(e => e.Event).Where( d => d.TargetId == LoggedUser().UserId);
+            ViewBag.Invites = _context.RequestedInvites.Include(u => u.User).Include(e => e.Event).Where( d => d.Requester == LoggedUser().UserId);
             return View();
         }
         [HttpGet("event/join/{eventId}")]
