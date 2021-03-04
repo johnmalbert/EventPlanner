@@ -32,7 +32,7 @@ namespace EventPlanner.Controllers
             //get the current user
             User CurrentUser = LoggedUser();
             if(CurrentUser == null)
-                return RedirectToAction("Index");
+                return Redirect("/Logout");
             
             //get all the events for the current user
             ViewBag.Events = _context.Events.Where(e => e.Creator == CurrentUser);
@@ -46,7 +46,7 @@ namespace EventPlanner.Controllers
             //get the current user
             User CurrentUser = LoggedUser();
             if(CurrentUser == null)
-                return RedirectToAction("Index");
+                return Redirect("/Logout");
 
             //get the event 
             Event CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == num);
@@ -67,7 +67,7 @@ namespace EventPlanner.Controllers
             //get current user
             User CurrentUser = LoggedUser();
             if(CurrentUser == null)
-                return RedirectToAction("Index");
+                return Redirect("/Logout");
             //show all the reminders, sorted by event
             ViewBag.AllReminders = _context.Reminders
                 .Include(r => r.Event)

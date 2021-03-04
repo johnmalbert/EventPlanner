@@ -91,6 +91,16 @@ namespace EventPlanner.Controllers
             if(ViewBag.CurrentUser == null) //send back to index if not logged in.
                 return Redirect("/");
             
+            User CurrentUser = _context.Users.Include(u => u.Friends).FirstOrDefault(u => u.UserId == HttpContext.Session.GetInt32("LoggedUser"));
+            List<User> FriendsOfUser = new List<User>();
+
+            foreach (var item in CurrentUser.Friends)
+            {   
+                FriendsOfUser.Add(_context.Users.FirstOrDefault(u => u.UserId == item.FriendId));
+                Console.WriteLine("Added to list.");
+            }
+            ViewBag.Friends = FriendsOfUser;
+            ViewBag.CurrentUser = CurrentUser;
             ViewBag.CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == EventId);
             return View();
         }
