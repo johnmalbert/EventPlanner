@@ -41,15 +41,19 @@
             <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
+            @foreach (var vent in ViewBag.JoinedEvent)
+            {
+              if(vent.Event.ScheduledAt.Date == thisDay.Date){
+                
+                <p class="d-sm">@vent.Event.Title</p>
+              } 
+            }
           @foreach (var vent in ViewBag.Events)
           {
               if(vent.ScheduledAt.Date == thisDay.Date){
                 
                 <p class="d-sm">@vent.Title</p>
-              } else {
-
-                <p class="d-sm-none">No events</p>
-              }
+              } 
           }
           </div> 
         }
@@ -63,15 +67,19 @@
               <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
+            @foreach (var vent in ViewBag.JoinedEvent)
+            {
+              if(vent.Event.ScheduledAt.Date == thisDay.Date){
+                
+                <p class="d-sm">@vent.Event.Title</p>
+              } 
+            }
           @foreach (var vent in ViewBag.Events)
           {
               if(vent.ScheduledAt.Date == thisDay.Date){
                 
                 <p class="d-sm">@vent.Title</p>
-              } else {
-
-                <p class="d-sm-none">No events</p>
-              }
+              } 
           }
           </div>
         }
@@ -90,15 +98,19 @@
           <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
           <span class="col-1"></span>
         </h5>
+            @foreach (var vent in ViewBag.JoinedEvent)
+            {
+              if(vent.Event.ScheduledAt.Date == thisDay.Date){
+                
+                <p class="d-sm">@vent.Event.Title</p>
+              } 
+            }
           @foreach (var vent in ViewBag.Events)
           {
               if(vent.ScheduledAt.Date == thisDay.Date){
                 
                 <p class="d-sm">@vent.Title</p>
-              } else {
-
-                <p class="d-sm-none">No events</p>
-              }
+              } 
           }
           </div>
     } else {
@@ -111,15 +123,19 @@
           <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
           <span class="col-1"></span>
         </h5>
+            @foreach (var vent in ViewBag.JoinedEvent)
+            {
+              if(vent.Event.ScheduledAt.Date == thisDay.Date){
+                
+                <p class="d-sm">@vent.Event.Title</p>
+              } 
+            }
           @foreach (var vent in ViewBag.Events)
           {
               if(vent.ScheduledAt.Date == thisDay.Date){
                 
                 <p class="d-sm">@vent.Title</p>
-              } else {
-
-                <p class="d-sm-none">No events</p>
-              }
+              } 
           }
           </div>
         
