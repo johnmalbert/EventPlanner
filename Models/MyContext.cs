@@ -10,6 +10,8 @@ namespace EventPlanner.Models
         public DbSet<Time> Times {get;set;}
         public DbSet<Friend> Friends {get;set;}
         public DbSet<Reminder> Reminders {get; set;}
+        public DbSet<Invite> Invites { get; set; }
+        public DbSet<RequestedInvite> RequestedInvites { get; set; }
         //add events
 
         // add other models

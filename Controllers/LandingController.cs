@@ -55,7 +55,7 @@ namespace EventPlanner.Controllers
                 _context.Add(user);
                 _context.SaveChanges();
                 HttpContext.Session.SetInt32("LoggedUser", user.UserId);
-                return RedirectToAction("Dashboard");
+                return Redirect("/Dashboard");
             }
             return View("Register");
         }
