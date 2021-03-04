@@ -47,6 +47,7 @@ namespace EventPlanner.Controllers
                 return Redirect("/");
             }
             //get current user
+            ViewBag.BestDates = BestDate();
             ViewBag.CurrentUser = LoggedUser();
             return View();
         }
@@ -128,8 +129,6 @@ namespace EventPlanner.Controllers
         }
         public Dictionary<DateTime,int> BestDate() // this will return null if the user isn't logged in.
         {
-                        Console.WriteLine("STart delay");
-            Thread.Sleep(3000);
             List<DateTime> GoodTimes = new List<DateTime>();
                 foreach( Friend fr in _context.Friends.Include(u =>u.User).ThenInclude(g => g.FreeTimes).Where(t => t.TargetId == LoggedUser().UserId && t.Status ==2)){
                     foreach(Time gt in fr.User.FreeTimes){
