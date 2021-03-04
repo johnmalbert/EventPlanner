@@ -4,9 +4,8 @@
 @model Event
 
 <h1>Create a new event!</h1>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-
         <div class="col-10">
             <form action="/event/create" method="post">
                 <div class='form-group'>
@@ -32,7 +31,7 @@
                 <button type="submit" class="btn btn-primary">Enter Event!</button>
             </form>
         </div>
-        <div class="col-2">
+        <div class="col-4">
             @{
                 <h2>Best Dates for Friends</h2>
                 foreach (var date in ViewBag.BestDates)
