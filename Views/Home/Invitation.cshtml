@@ -2,4 +2,18 @@
     ViewData["Title"] = "Invitation";
 }
 
-<h1>This will display an event invitation</h1>
+<h1>Invites</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Event Title</th>
+            <th>Date</th>
+            <th>Invited By</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var invite in ViewBag.Invites){
+            <p>@invite.User.FirstName</p>
+        }
+    </tbody>
+</table>

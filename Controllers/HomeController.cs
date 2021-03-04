@@ -105,9 +105,11 @@ namespace EventPlanner.Controllers
             return View();
         }
 
-        [HttpGet("invitation/{EventId}")]
-        public IActionResult Invitation(int EventId)
+        [HttpGet("invitation")]
+        public IActionResult Invitation()
         {
+            ViewBag.Invites = _context.Invites.Include(u => u.User).Include(e => e.Event).Where( d => d.TargetId == LoggedUser().UserId);
+            ViewBag.Invites = _context.RequestedInvites.Include(u => u.User).Include(e => e.Event).Where( d => d.Requester == LoggedUser().UserId);
             return View();
         }
         [HttpGet("delete/{eventId}")]

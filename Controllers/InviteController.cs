@@ -39,11 +39,13 @@ namespace EventPlanner.Controllers
             //create a new Invite
             Invite newInvite = new Invite{
                 UserId = CurrentUser.UserId,
-                TargetId = UserToInvite.UserId
+                TargetId = UserToInvite.UserId,
+                EventId = EventToInvite.EventId
             };
             RequestedInvite newRequest = new RequestedInvite{
                 UserId = UserToInvite.UserId,
-                Requester = CurrentUser.UserId
+                Requester = CurrentUser.UserId,
+                EventId = EventToInvite.EventId
             };
 
             _context.Add(newInvite);
