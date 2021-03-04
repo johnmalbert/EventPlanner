@@ -10,10 +10,9 @@
 
 <div class="container">
     <h2>@ViewBag.CurrentEvent.Location</h2>
-    <h1 class="display-4 text-center">Location: @ViewBag.CurrentEvent.Location</h1>
     <div class="row">
         <div class="col-sm-12">
-            <iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key={YOUR_API_KEY}
+            <iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=@Keys.MapsKey
                 &q=@ViewBag.CurrentEvent.Location">
             </iframe>
         </div>
@@ -22,7 +21,7 @@
 <div class="container">
 @if(ViewBag.CurrentUser.UserId == ViewBag.CurrentEvent.UserId){
     <h1>Invite Friends to the event:</h1>
-    <table class="table table-light">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th scope="col">Friend</th> 
