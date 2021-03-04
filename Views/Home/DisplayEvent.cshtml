@@ -19,8 +19,8 @@
         </div>
     </div>
 </div>
-
 <div class="container">
+@if(ViewBag.CurrentUser.UserId == ViewBag.CurrentEvent.UserId){
     <h1>Invite Friends to the event:</h1>
     <table class="table table-light">
         <thead>
@@ -39,4 +39,9 @@
             }
         </tbody>
     </table>
+} else if(ViewBag.CurrentEvent.Guests.Contains(ViewBag.CheckLink)){
+    <a href="leave/@ViewBag.CurrentEvent.EventId">Leave</a>
+} else {
+    <a href="join/@ViewBag.CurrentEvent.EventId">Join</a>
+}
 </div>
