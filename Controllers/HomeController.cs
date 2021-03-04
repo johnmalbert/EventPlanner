@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -26,9 +27,8 @@ namespace EventPlanner.Controllers
         public IActionResult Dashboard()
         {
             if(LoggedUser()==null){
-                return RedirectToAction("Index");
+                return Redirect("/");
             }
-            BestDate();
             ViewBag.Events = _context.Events.Include(u => u.Creator).Include(g => g.Guests).OrderBy(time => time.ScheduledAt);
             ViewBag.me = LoggedUser();
             ViewBag.Me = _context.Users.Include(t => t.FreeTimes).FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser"));
@@ -43,7 +43,7 @@ namespace EventPlanner.Controllers
         {
             if(LoggedUser() == null)
             {
-                return RedirectToAction("Index");
+                return Redirect("/");
             }
             //get current user
             ViewBag.CurrentUser = LoggedUser();
@@ -85,7 +85,7 @@ namespace EventPlanner.Controllers
             //see if user is logged in
             ViewBag.CurrentUser = LoggedUser();
             if(ViewBag.CurrentUser == null) //send back to index if not logged in.
-                return RedirectToAction("Index");
+                return Redirect("/");
             
             ViewBag.CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == EventId);
             return View();
@@ -111,7 +111,7 @@ namespace EventPlanner.Controllers
             }
             else
             {
-                return RedirectToAction("Index");
+                return Redirect("/");
             }
         }
 
@@ -127,6 +127,8 @@ namespace EventPlanner.Controllers
         }
         public Dictionary<DateTime,int> BestDate() // this will return null if the user isn't logged in.
         {
+                        Console.WriteLine("STart delay");
+            Thread.Sleep(3000);
             List<DateTime> GoodTimes = new List<DateTime>();
                 foreach( Friend fr in _context.Friends.Include(u =>u.User).ThenInclude(g => g.FreeTimes).Where(t => t.TargetId == LoggedUser().UserId && t.Status ==2)){
                     foreach(Time gt in fr.User.FreeTimes){
@@ -148,7 +150,7 @@ namespace EventPlanner.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("Index");
+            return Redirect("/");
         }
     }
 }
