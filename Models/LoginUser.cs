@@ -13,6 +13,7 @@ namespace EventPlanner.Models
 
         [Required(ErrorMessage="Invalid email/password combination.")]
         [DataType(DataType.Password)]
+        [Display(Name="Password")]
         public string LoginPassword { get; set; }
 
     }
