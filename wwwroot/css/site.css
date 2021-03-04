@@ -7,7 +7,12 @@ for details on configuring this project to bundle and minify static web assets. 
   --third: #5B7065;
   --fourth: #C9D1C8;
 }
-
+h1,h2,h3,h4,td {
+  color: var(--fourth);
+}
+th{
+  color: var(--third);
+}
 header {
   background-color: var(--secondary);
   color: var(--fourth);
