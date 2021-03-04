@@ -13,6 +13,17 @@ h1,h2,h3,h4,td {
 th{
   color: var(--third);
 }
+
+
+.day {
+  background-color: var(--third);
+  color: var(--secondary);
+  border:#04202C;
+}
+.tday {
+  background-color: var(--fourth);
+  color: var(--primary);
+}
 header {
   background-color: var(--secondary);
   color: var(--fourth);

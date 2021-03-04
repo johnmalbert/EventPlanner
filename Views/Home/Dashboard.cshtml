@@ -36,10 +36,10 @@
         
         @for(var x = 1; x<=Calstart;x++){
           DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month-1,ViewBag.LastMonth-(Calstart-x));
-          <div class ='day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted'>
+          <div class ='day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block'>
           <h5 class="row align-items-center">
               <span class="date col-1">@(ViewBag.LastMonth-(Calstart-x))</span>
-            <small class="col d-sm-none text-center text-muted">@thisDay.DayOfWeek</small>
+            <small class="col d-sm-none text-center">@thisDay.DayOfWeek</small>
             <span class="col-1"></span>
           </h5>
             @foreach (var vent in ViewBag.JoinedEvent)
@@ -61,7 +61,7 @@
         @for(var y = 1; y<=(7-Calstart); y++){
             DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month,day);
         <div
-          class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
+          class="tday col-sm p-2 border border-left-0 border-top-0 text-truncate">
           <h5 class="row align-items-center">
               <span class="date col-1">@day</span>
               @{day++;}
@@ -92,7 +92,7 @@
       DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month,day);
 
       <div
-        class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
+        class="tday col-sm p-2 border border-left-0 border-top-0 text-truncate">
         <h5 class="row align-items-center">
           <span class="date col-1">@day</span>
           @{day++;}
@@ -117,7 +117,7 @@
     } else {
       DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month+1,nextmonth);
       <div
-        class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block bg-light text-muted">
+        class="day col-sm p-2 border border-left-0 border-top-0 text-truncate d-none d-sm-inline-block">
         <h5 class="row align-items-center">
           <span class="date col-1">@nextmonth</span>
           @{nextmonth++;}

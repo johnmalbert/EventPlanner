@@ -6,7 +6,7 @@
 <h1>Create a new event!</h1>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-10">
+        <div class="col-8">
             <form action="/event/create" method="post">
                 <div class='form-group'>
                     <label asp-for="Title"></label>
@@ -33,7 +33,7 @@
         </div>
         <div class="col-4">
             @{
-                <h2>Best Dates for Friends</h2>
+                <h2>Suggested Dates</h2>
                 foreach (var date in ViewBag.BestDates)
                 {
                     <p>@date.Key.ToString("MM/dd/yyyy") - @date.Value available</p>
