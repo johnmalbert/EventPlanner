@@ -143,6 +143,7 @@
     </thead>
     <tbody>
         @{
+        
             if(ViewBag.Events != null){
             foreach (Event vent in ViewBag.Events)
             {
@@ -166,28 +167,28 @@
               }
         }
             }
-        if(ViewBag.JoinedEvents != null){
-            foreach (Event vent in ViewBag.JoinedEvents)
+            foreach (Link vent in ViewBag.JoinedEvent)
             {
-              if(vent.ScheduledAt > DateTime.Now){
+              if(vent.Event.ScheduledAt > DateTime.Now){
                 <tr>
-                    <td><a href="event/@vent.EventId">@vent.Title</a></td>
-                    <td>@vent.ScheduledAt.ToString("MMM dd, yyyy h:mm tt")</td>
-                    <td>@vent.Duration @vent.HoursOrDays</td>
-                    <td>@vent.Creator.FirstName</td>
+                    <td><a href="event/@vent.EventId">@vent.Event.Title</a></td>
+                    <td>@vent.Event.ScheduledAt.ToString("MMM dd, yyyy h:mm tt")</td>
+                    <td>@vent.Event.Duration @vent.Event.HoursOrDays</td>
+                    <td>@vent.Event.Creator.FirstName</td>
                     <td></td>
-                @if (vent.Creator.UserId == ViewBag.me.UserId)
+                @if (vent.Event.Creator.UserId == ViewBag.me.UserId)
             
                 {
                     <td><a href="/delete/@vent.EventId">Delete</a></td>
                 }
-                else if (vent.Guests.Any(id => id.UserId == ViewBag.me.UserId)){
-                    <td><a href="/join/@vent.EventId">Join</a></td>
+                else if (vent.Event.Guests.Any(id => id.UserId == ViewBag.me.UserId)){
+                    <td><a href="event/leave/@vent.Event.EventId">Leave</a></td>
+                } else if (vent.Event.Guests.Any(id => id.UserId != ViewBag.me.UserId)){
+                    <td><a href="event/join/@vent.Event.EventId">Join</a></td>
                 }
                   <td><a href="/reminder/@vent.EventId">Manage</a></td>
                 </tr>
               }
-        }
         }
         }
     </tbody>

@@ -30,7 +30,8 @@ namespace EventPlanner.Controllers
                 return Redirect("/");
             }
             ViewBag.Events = _context.Events.Include(u => u.Creator).Include(g => g.Guests).ThenInclude(us => us.User).Where(t => t.Creator == LoggedUser()).OrderBy(time => time.ScheduledAt);
-            ViewBag.JoinedEvent = _context.Links.Include(u => u.User).Include(g => g.Event).Where(t => t.User == LoggedUser()).OrderBy(time => time.Event.ScheduledAt);
+            ViewBag.JoinedEvent = _context.Links.Include(u => u.User).Include(g => g.Event).ThenInclude(i => i.Creator).Where(t => t.UserId == LoggedUser().UserId).OrderBy(time => time.Event.ScheduledAt);
+            Console.WriteLine(ViewBag.JoinedEvent);
             ViewBag.me = LoggedUser();
             ViewBag.Me = _context.Users.Include(t => t.FreeTimes).FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser"));
             ViewBag.LastMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month-1);
@@ -96,19 +97,37 @@ namespace EventPlanner.Controllers
 
             foreach (var item in CurrentUser.Friends)
             {   
-                FriendsOfUser.Add(_context.Users.FirstOrDefault(u => u.UserId == item.FriendId));
+                FriendsOfUser.Add(_context.Users.FirstOrDefault(u => u.UserId == item.TargetId));
                 Console.WriteLine("Added to list.");
             }
             ViewBag.Friends = FriendsOfUser;
+            ViewBag.CheckLink = _context.Links.FirstOrDefault(u => u.UserId == LoggedUser().UserId && u.EventId == EventId);
             ViewBag.CurrentUser = CurrentUser;
-            ViewBag.CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == EventId);
+            ViewBag.CurrentEvent = _context.Events.Include(u => u.Guests).FirstOrDefault(e => e.EventId == EventId);
             return View();
         }
 
-        [HttpGet("invitation/{EventId}")]
-        public IActionResult Invitation(int EventId)
+        [HttpGet("invitation")]
+        public IActionResult Invitation()
         {
+            ViewBag.Invites = _context.Invites.Include(u => u.User).Include(e => e.Event).Where( d => d.TargetId == LoggedUser().UserId);
+            ViewBag.RequestInvites = _context.RequestedInvites.Include(u => u.User).Include(e => e.Event).Where( d => d.Requester == LoggedUser().UserId);
             return View();
+        }
+        [HttpGet("event/join/{eventId}")]
+        public IActionResult JoinEvent(int eventId){
+            Link newLink = new Link(){UserId = LoggedUser().UserId, EventId = eventId};
+            _context.Add(newLink);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+        [HttpGet("event/leave/{eventId}")]
+        public IActionResult LeaveEvent(int eventId){
+            Link linkToDelete = _context.Links.FirstOrDefault(u => u.UserId == LoggedUser().UserId && u.EventId == eventId);
+            _context.Remove(linkToDelete);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+
         }
         [HttpGet("delete/{eventId}")]
         public IActionResult DeleteEvent(int EventId)
