@@ -44,8 +44,9 @@ a {
   margin: auto 0 auto auto;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+/* ------------------------------------------------------------------- */
+/* Sticky footer styles */
+
 html {
   font-size: 14px;
 }
@@ -71,8 +72,8 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
--------------------------------------------------- */
+/* ------------------------------------------------------------------- */
+
 html {
   position: relative;
   min-height: 100%;
@@ -89,6 +90,75 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.footer-container {
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------- */
+/* Login/Reg CSS */
+
+.login-group {
+  max-width: 400px;
+  margin: 200px auto auto;
+  padding: 50px;
+  background-color: var(--secondary);
+  border-radius: .5rem;
+}
+
+.login-group h2 {
+  text-align: center;
+}
+
+.input-icons i {
+  position: absolute;
+}
+
+.input-icons { 
+  width: 100%; 
+  margin-bottom: 10px; 
+}
+
+.icon { 
+  padding: 10px; 
+  min-width: 40px;
+  color: var(--primary);
+}
+
+.login-group input {
+  width: 100%; 
+  padding: 10px;
+  text-align: center; 
+}
+
+::placeholder {
+  text-align: end;
+}
+
+.registration-group {
+  max-width: 400px;
+  margin: 200px auto auto;
+  padding: 50px;
+  background-color: var(--secondary);
+  border-radius: .5rem;
+}
+
+.registration-group h2 {
+  text-align: center;
+}
+
+.registration-group input {
+  width: 100%; 
+  padding: 10px;
+  text-align: center; 
+}
+
+.fa.fa-check.icon {
+  color: var(--fourth);
+}
+
+/* ------------------------------------------------------------------- */
+/* SideNav Bar CSS */
 
 *,
 :before,
