@@ -29,7 +29,8 @@ namespace EventPlanner.Controllers
             if(LoggedUser()==null){
                 return Redirect("/");
             }
-            ViewBag.Events = _context.Events.Include(u => u.Creator).Include(g => g.Guests).OrderBy(time => time.ScheduledAt);
+            ViewBag.Events = _context.Events.Include(u => u.Creator).Include(g => g.Guests).ThenInclude(us => us.User).Where(t => t.Creator == LoggedUser()).OrderBy(time => time.ScheduledAt);
+            ViewBag.JoinedEvent = _context.Links.Include(u => u.User).Include(g => g.Event).Where(t => t.User == LoggedUser()).OrderBy(time => time.Event.ScheduledAt);
             ViewBag.me = LoggedUser();
             ViewBag.Me = _context.Users.Include(t => t.FreeTimes).FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser"));
             ViewBag.LastMonth = DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month-1);
