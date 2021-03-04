@@ -132,6 +132,97 @@ namespace EventPlanner.Controllers
             }
             return Redirect($"/reminder/{CurrentEvent.EventId}");
         }
+
+        [HttpGet("reminder/{eventNum}/create/24")]
+        public IActionResult OneDayBefore(int eventNum)
+        {
+            User CurrentUser = LoggedUser();
+            // get the event for the reminder
+            Event CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == eventNum);
+            //get the time before event to set the reminder
+            TimeSpan timeBeforeSpan = new TimeSpan(1,0,0,0,0);
+            DateTime setReminder = CurrentEvent.ScheduledAt - timeBeforeSpan;
+            //create a new reminder
+            Reminder newReminder = new Reminder{
+                User = CurrentUser,
+                Event = CurrentEvent,
+                MessageBody = $"Hello {CurrentUser.FirstName}, {Environment.NewLine} Your event {CurrentEvent.Title} is coming up! {Environment.NewLine} Location: {CurrentEvent.Location} {Environment.NewLine} Time: {CurrentEvent.ScheduledAt.ToString()}",
+                MesssageSubject = $"Event Reminder - {CurrentEvent.Title}",
+                to = CurrentUser.Email,
+                TimeToSendReminder = setReminder
+            };
+            if(DateTime.Now < newReminder.TimeToSendReminder)
+            {
+                _context.Add(newReminder);
+                _context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("Reminder is in the past."); // I have to work on this more to display the error in the view.
+                ModelState.AddModelError("Error", "Reminder must be set to a future time.");
+            }
+            return Redirect($"/reminder/{CurrentEvent.EventId}");
+        }
+        [HttpGet("reminder/{eventNum}/create/1")]
+        public IActionResult OneHourBefore(int eventNum)
+        {
+            User CurrentUser = LoggedUser();
+            // get the event for the reminder
+            Event CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == eventNum);
+            //get the time before event to set the reminder
+            TimeSpan timeBeforeSpan = new TimeSpan(0,1,0,0,0);
+            DateTime setReminder = CurrentEvent.ScheduledAt - timeBeforeSpan;
+            //create a new reminder
+            Reminder newReminder = new Reminder{
+                User = CurrentUser,
+                Event = CurrentEvent,
+                MessageBody = $"Hello {CurrentUser.FirstName}, {Environment.NewLine} Your event {CurrentEvent.Title} is coming up! {Environment.NewLine} Location: {CurrentEvent.Location} {Environment.NewLine} Time: {CurrentEvent.ScheduledAt.ToString()}",
+                MesssageSubject = $"Event Reminder - {CurrentEvent.Title}",
+                to = CurrentUser.Email,
+                TimeToSendReminder = setReminder
+            };
+            if(DateTime.Now < newReminder.TimeToSendReminder)
+            {
+                _context.Add(newReminder);
+                _context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("Reminder is in the past."); // I have to work on this more to display the error in the view.
+                ModelState.AddModelError("Error", "Reminder must be set to a future time.");
+            }
+            return Redirect($"/reminder/{CurrentEvent.EventId}");
+        }
+        [HttpGet("reminder/{eventNum}/create/10")]
+        public IActionResult TenMinutesBefore(int eventNum)
+        {
+            User CurrentUser = LoggedUser();
+            // get the event for the reminder
+            Event CurrentEvent = _context.Events.FirstOrDefault(e => e.EventId == eventNum);
+            //get the time before event to set the reminder
+            TimeSpan timeBeforeSpan = new TimeSpan(0,0,10,0,0);
+            DateTime setReminder = CurrentEvent.ScheduledAt - timeBeforeSpan;
+            //create a new reminder
+            Reminder newReminder = new Reminder{
+                User = CurrentUser,
+                Event = CurrentEvent,
+                MessageBody = $"Hello {CurrentUser.FirstName}, {Environment.NewLine} Your event {CurrentEvent.Title} is coming up! {Environment.NewLine} Location: {CurrentEvent.Location} {Environment.NewLine} Time: {CurrentEvent.ScheduledAt.ToString()}",
+                MesssageSubject = $"Event Reminder - {CurrentEvent.Title}",
+                to = CurrentUser.Email,
+                TimeToSendReminder = setReminder
+            };
+            if(DateTime.Now < newReminder.TimeToSendReminder)
+            {
+                _context.Add(newReminder);
+                _context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("Reminder is in the past."); // I have to work on this more to display the error in the view.
+                ModelState.AddModelError("Error", "Reminder must be set to a future time.");
+            }
+            return Redirect($"/reminder/{CurrentEvent.EventId}");
+        }
         public void SendReminder(Reminder reminder)
         {
             MailMessage message = new MailMessage(reminder.from, reminder.to);

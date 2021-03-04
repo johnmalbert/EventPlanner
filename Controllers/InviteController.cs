@@ -45,15 +45,13 @@ namespace EventPlanner.Controllers
             RequestedInvite newRequest = new RequestedInvite{
                 UserId = UserToInvite.UserId,
                 Requester = CurrentUser.UserId,
-                EventId = EventToInvite.EventId
+                EventId = EventToInvite.EventId,
             };
-
             _context.Add(newInvite);
             _context.Add(newRequest);
             _context.SaveChanges();
             //create a new email
             SendInvite(CurrentUser,UserToInvite,EventToInvite);
-
             return Redirect("/Dashboard");
         }
         public void SendInvite(User Creator, User Invitee, Event Event)
