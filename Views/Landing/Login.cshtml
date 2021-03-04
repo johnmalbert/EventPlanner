@@ -3,27 +3,19 @@
     ViewData["Title"] = "Login";
 }
 
-        <div class="col-4 ml-3">
-            <h2>Login</h2>
-            <form asp-action="Logging" asp-controller="Landing" method="POST">
-                <div class="row mt-4 align-items-end">
-                    <div class="col border border-dark p-3">
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" asp-for="Email"></label>
-                            <div class="col-sm-7">
-                                <input class="form-control" asp-for="Email">
-                                <span class="text-danger" asp-validation-for="Email"></span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-sm-4 col-form-label" asp-for="LoginPassword">Password</label>
-                            <div class="col-sm-7">
-                                <input class="form-control" asp-for="LoginPassword">
-                                <span class="text-danger" asp-validation-for="LoginPassword"></span>
-                            </div>
-                        </div>
-                        <button class="row ml-auto mr-3" type="submit">Login</button>
-                    </div>
-                </div>
-            </form>
+<div class="login-group">
+    <h2>Login</h2>
+    <form asp-action="Logging" asp-controller="Landing" method="POST">
+        <div class="input-icons">
+            <i class="fa fa-envelope icon"></i>
+            <input class="form-control" asp-for="Email" placeholder="Email Address">
+            <span class="text-danger" asp-validation-for="Email"></span>
         </div>
+        <div class="input-icons">
+            <i class="fa fa-lock icon"></i>
+            <input class="form-control" asp-for="LoginPassword" placeholder="Password">
+            <span class="text-danger" asp-validation-for="LoginPassword"></span>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit">Login</button>
+    </form>
+</div>

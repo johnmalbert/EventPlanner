@@ -3,48 +3,35 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="container-fluid ">
-    <div class="row justify-content-center">
-        <form class="col-4" asp-action="Registration" asp-controller="Landing" method="post">
-            <h2>Register</h2>
-            <div class="row mt-4 align-items-end">
-                <div class="col border border-dark p-3">
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label" asp-for="FirstName"></label>
-                        <div class="col-sm-7">
-                            <span asp-validation-for="FirstName"></span>
-                            <input class="form-control" asp-for="FirstName">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label" asp-for="LastName"></label>
-                        <div class="col-sm-7">
-                            <span asp-validation-for="LastName"></span>
-                            <input class="form-control" asp-for="LastName">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label" asp-for="Email"></label>
-                        <div class="col-sm-7">
-                            <span asp-validation-for="Email"></span>
-                            <input class="form-control" asp-for="Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label" asp-for="Password"></label>
-                        <div class="col-sm-7">
-                            <span asp-validation-for="Password"></span>
-                            <input class="form-control" asp-for="Password">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label" asp-for="Confirm">Confirm Password: </label>
-                        <div class="col-sm-7">
-                            <span asp-validation-for="Confirm"></span>
-                            <input class="form-control" asp-for="Confirm">
-                        </div>
-                    </div>
-                    <button class="row ml-auto mr-3" type="submit">Register</button>
-                </div>
-            </div>
-        </form>
+<div class="registration-group">
+    <h2>Registration</h2>
+    <form asp-action="Registration" asp-controller="Landing" method="POST">
+        <div class="input-icons">
+            <i class="fa fa-user icon"></i>
+            <input class="form-control" asp-for="FirstName" placeholder="First Name">
+            <span class="text-danger" asp-validation-for="FirstName"></span>
+        </div>
+        <div class="input-icons">
+            <i class="fa fa-user icon"></i>
+            <input class="form-control" asp-for="LastName" placeholder="Last Name">
+            <span class="text-danger" asp-validation-for="LastName"></span>
+        </div>
+        <div class="input-icons">
+            <i class="fa fa-envelope icon"></i>
+            <input class="form-control" asp-for="Email" placeholder="Email Address">
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+        <div class="input-icons">
+            <i class="fa fa-lock icon"></i>
+            <input class="form-control" asp-for="Password" placeholder="Password">
+            <span class="text-danger" asp-validation-for="Password"></span>
+        </div>
+        <div class="input-icons">
+            <i class="fa fa-lock icon"></i>
+            <i class="fa fa-check icon"></i>
+            <input class="form-control" asp-for="Confirm" placeholder="Confirm Password">
+            <span class="text-danger" asp-validation-for="Confirm"></span>
+        </div>
+        <button class="btn btn-primary btn-block btn-lg" type="submit">Register</button>
+    </form>
+</div>
