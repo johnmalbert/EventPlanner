@@ -20,21 +20,12 @@
                     <span asp-validation-for="Location" class="text-danger"></span>
                 </div>
                 <div class='form-group'>
-                    <label asp-for="ScheduledAt"></label>
+                    <label asp-for="ScheduledAt">Date</label>
                     <input class="form-control" asp-for="ScheduledAt">
                     <span asp-validation-for="ScheduledAt" class="text-danger"></span>
                 </div>
                 <div class='form-group'>
-                    <label asp-for="HoursOrDays"></label>
-                    <select class="form-select" asp-name="HoursOrDays">
-                        <option selected>Select hours or days</option>
-                        <option value="Hours">Hours</option>
-                        <option value="Days">Days</option>
-                    </select>
-                    <span asp-validation-for="HoursOrDays" class="text-danger"></span>
-                </div>
-                <div class='form-group'>
-                    <label asp-for="Duration"></label>
+                    <label asp-for="Duration">Duration (in hours)</label>
                     <input class="form-control" asp-for="Duration" placeholder="Enter the event duration">
                     <span asp-validation-for="Duration" class="text-danger"></span>
                 </div>
@@ -46,7 +37,7 @@
                 <h2>Best Dates for Friends</h2>
                 foreach (var date in ViewBag.BestDates)
                 {
-                    <p>@date.Key.ToString("MM/dd/yyyy") - @date.Value</p>
+                    <p>@date.Key.ToString("MM/dd/yyyy") - @date.Value available</p>
                 }
             }
         </div>

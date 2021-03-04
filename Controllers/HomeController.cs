@@ -65,6 +65,8 @@ namespace EventPlanner.Controllers
                     ModelState.AddModelError("ScheduledAt", "Activity must be in the future");
                     return View("NewEvent");
                 }
+                TimeSpan duration = new TimeSpan(0, newEvent.Duration, 0, 0);
+                newEvent.EndAt = newEvent.ScheduledAt.Add(duration);
                 Console.WriteLine($"Created event {newEvent.Title}");
                 newEvent.Creator = CurrentUser;
                 _context.Add(newEvent);
