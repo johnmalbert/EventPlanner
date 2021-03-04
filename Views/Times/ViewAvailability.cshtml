@@ -129,13 +129,7 @@
         </div>
     
   }
-  @{
-    <h2>Best Dates for Friends</h2>
-    foreach(var date in ViewBag.BestDates){
-      <p>@date.Key.ToString("MM/dd/yyyy") - @date.Value</p>
 
-    }
-  }
   <form class="col-4 mt-5" asp-action="NewTime" asp-controller="Times" method="post">
     <h2>Add Free Time</h2>
     <div class="row mt-4 align-items-end">
