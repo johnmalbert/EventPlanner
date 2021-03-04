@@ -120,8 +120,16 @@ namespace EventPlanner.Controllers
                 to = CurrentUser.Email,
                 TimeToSendReminder = setReminder
             };
-            _context.Add(newReminder);
-            _context.SaveChanges();
+            if(DateTime.Now < newReminder.TimeToSendReminder)
+            {
+                _context.Add(newReminder);
+                _context.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine("Reminder is in the past."); // I have to work on this more to display the error in the view.
+                ModelState.AddModelError("Error", "Reminder must be set to a future time.");
+            }
             return Redirect($"/reminder/{CurrentEvent.EventId}");
         }
         public void SendReminder(Reminder reminder)
