@@ -132,13 +132,13 @@
     <div class="row mt-4 align-items-end">
       <div class="col border border-dark p-3">
         <div class="form-group row">
-          <label class="col-sm-4 col-form-label" asp-for="StartAt"></label>
+          <label class="col-sm-4 col-form-label" asp-for="StartAt">Date you are free:</label>
           <div class="col-sm-7">
             <span asp-validation-for="StartAt"></span>
             <input class="form-control" asp-for="StartAt" type="date">
           </div>
         </div>
-        <button class="row ml-auto mr-3" type="submit">Add to Availability</button>
+        <button class="row ml-auto mr-3 btn btn-primary" type="submit">Add to Availability</button>
       </div>
     </div>
   </form>

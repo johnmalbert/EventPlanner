@@ -2,21 +2,18 @@
 @{
     ViewData["Title"] = "Dashboard";
 }
-<form action="findFriend" method="POST">
-    <label name="search">Search for Friend using their email</label>
-    <input type="text" name="search">
-    <button type="submit">Search</button>
-</form>
+<div class="container">
+<h1 class="display-4 text-center mt-3">Friend Activity</h1>
 <table class="table mt-5">
     <thead>
         <tr><th><h4>Requests</h4></th></tr>
-        
+        <tr></tr>
     </thead>
     <tbody>
         @foreach (var fri in ViewBag.Invites)
         {
             <tr>
-                <td>@fri.User.FirstName</td>
+                <td>@fri.User.FirstName @fri.User.LastName</td>
                 <td><a href="confirm/@fri.UserId">Accept</a></td>
                 <td><a href="deny">Reject</a></td>
             </tr>
@@ -26,7 +23,10 @@
     <table class="table mt-5">
 
     <thead>
-        <tr><th><h4>Friends</h4></th></tr>
+        <tr>
+            <th><h4>Friends</h4></th>
+            <tr> </tr>
+        </tr>
         <tr>
             <th scope="col">Name</th>
             <th scope="col">Status</th>
@@ -36,7 +36,7 @@
         @foreach (var fr in ViewBag.Friends)
         {
             <tr>
-                <td>@fr.User.FirstName</td>
+                <td>@fr.User.FirstName @fr.User.LastName</td>
                 @if (fr.Status == 1)
                 {
                     <td>Invited</td>
@@ -49,3 +49,22 @@
         }
     </tbody>
 </table>
+<div class="container text-center p-3">
+    <div style="width: 50%; margin: auto;">
+    <form action="findFriend" method="POST" >
+        <div class="form-group">
+            <h5>Email Lookup</h5>
+            <div class="input-icons text-left">
+                <i class="fa fa-envelope icon"></i>
+                <input class="form-control" type="email" name="search" placeholder="Enter Email">
+            </div>
+            <button type="submit" class="btn btn-primary mt-2">Search</button>
+            @if(ViewBag.Message != null)
+            {
+                <h4 class="text-center mt-4">@ViewBag.Message</h4>
+            }
+        </div>
+    </form>
+    </div>
+</div>
+</div>
