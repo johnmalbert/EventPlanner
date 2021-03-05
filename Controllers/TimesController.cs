@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Net.Mail;  
+using System.Text;
 
 namespace EventPlanner.Controllers
 {
@@ -64,7 +66,10 @@ namespace EventPlanner.Controllers
                 return RedirectToAction("ViewFriends");
             }
             Friend link = _context.Friends.FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser") && u.TargetId == searchedfor.UserId);
+            //send a friend request via email
+            User CurrentUser = _context.Users.First(u => u.UserId ==(int)HttpContext.Session.GetInt32("LoggedUser"));
             if(link == null){
+                SendInvite(CurrentUser, searchedfor);
                 Friend NewFriend = new Friend(){ UserId = (int)HttpContext.Session.GetInt32("LoggedUser"), TargetId = searchedfor.UserId};
                 _context.Add(NewFriend);
                 _context.SaveChanges();
@@ -99,6 +104,29 @@ namespace EventPlanner.Controllers
                 Console.WriteLine(l.Value);
             }
             return BestTimes;
+        }
+
+        public void SendInvite(User Creator, User Invitee)
+        {
+            MailMessage message = new MailMessage("jqzeventreminders@gmail.com", Invitee.Email);
+            message.Subject = $"Friend Invitation from {Creator.FirstName} {Creator.LastName}";
+            message.Body = $"Hello {Invitee.FirstName}, You are have a calendar friend request from {Creator.FirstName} {Creator.LastName}. Please respond by going to http://localhost:5000/login to accept.";
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            System.Net.NetworkCredential basicCredential1 = new System.Net.NetworkCredential("jqzeventreminders@gmail.com", "JQZEvents");
+            client.EnableSsl = true;  
+            client.UseDefaultCredentials = false;  
+            client.Credentials = basicCredential1;  
+            try   
+            {  
+                client.Send(message);
+                Console.WriteLine("sent friend request email.");
+            }               
+            catch (Exception ex)
+            {  
+                Console.WriteLine(ex);
+            }
         }
     }
 }

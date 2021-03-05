@@ -47,6 +47,7 @@ namespace EventPlanner.Controllers
                 Requester = CurrentUser.UserId,
                 EventId = EventToInvite.EventId,
             };
+            
             _context.Add(newInvite);
             _context.Add(newRequest);
             _context.SaveChanges();
