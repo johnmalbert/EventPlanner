@@ -44,6 +44,7 @@ a {
   margin: auto 0 auto auto;
 }
 
+
 /* ------------------------------------------------------------------- */
 /* Sticky footer styles */
 
@@ -160,6 +161,14 @@ body {
 
 .fa.fa-check.icon {
   color: var(--fourth);
+}
+
+.index-h1 {
+  font-family: 'Sigmar One', cursive;
+}
+
+img {
+  width: 25rem;
 }
 
 /* ------------------------------------------------------------------- */
