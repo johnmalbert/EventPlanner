@@ -143,9 +143,7 @@ namespace EventPlanner.Controllers
             {
                 //get the event to delete
                 Event eventToDelete = _context.Events.FirstOrDefault(e => e.EventId == EventId);
-                var RemindersToDelete = _context.Reminders.Where(r => r.Event == eventToDelete);
                 _context.Remove(eventToDelete);
-                _context.Remove(RemindersToDelete);
                 _context.SaveChanges();
                 return RedirectToAction("Dashboard");
             }
@@ -184,6 +182,16 @@ namespace EventPlanner.Controllers
             }
             return BestTimes;
         }
+        [HttpGet("/link/{linkId}/delete")]
+        public IActionResult DeleteLink(int linkId)
+        {
+            Console.WriteLine("Delete link " + linkId);
+            Link LinkToDel = _context.Links.First(l => l.LinkId == linkId);
+            _context.Remove(LinkToDel);
+            _context.SaveChanges();
+            return RedirectToAction("Dashboard");
+        }
+
         [HttpGet("logout")]
         public IActionResult Logout()
         {
