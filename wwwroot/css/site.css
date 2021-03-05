@@ -7,12 +7,7 @@ for details on configuring this project to bundle and minify static web assets. 
   --third: #5B7065;
   --fourth: #C9D1C8;
 }
-h1,h2,h3,h4,td {
-  color: var(--fourth);
-}
-th{
-  color: var(--third);
-}
+
 header {
   background-color: var(--secondary);
   color: var(--fourth);
@@ -82,6 +77,11 @@ button.accept-policy {
 html {
   position: relative;
   min-height: 100%;
+}
+
+.container-layout {
+  margin-left: 15%;
+  margin-right: 15%;
 }
 
 body {
@@ -188,16 +188,14 @@ body {
 }
 
 .header {
-  position: fixed;
-  left: 0;
+  position: absolute;
   top: 0;
   bottom: 0;
-  width: 17.5em;
+  width: 10%;
   background: var(--secondary);
 }
 
 .logo {
-  text-transform: lowercase;
   font: 300 2em "Source Sans Pro", Helvetica, Arial, sans-serif;
   text-align: center;
   padding: 0;
@@ -232,31 +230,9 @@ body {
   color: var(--fourth);
   font: 400 1.125em "Source Sans Pro", Helvetica, Arial, sans-serif;
   text-align: center;
-  text-transform: lowercase;
 }
 .main-nav a:hover {
   color: var(--fourth);
-}
-
-.social-links {
-  border-bottom: solid 1px var(--third);
-}
-.social-links li {
-  width: 25%;
-  border-left: solid 1px var(--third);
-}
-.social-links li:first-child {
-  border: none;
-}
-.social-links a {
-  display: block;
-  height: 5.5em;
-  text-align: center;
-  color: var(--third);
-  font: 0.75em/5.5em "Source Sans Pro", Helvetica, Arial, sans-serif;
-}
-.social-links a:hover {
-  color: #dfdbd9;
 }
 
 .list-hover-slide li {
@@ -284,4 +260,37 @@ body {
 }
 .list-hover-slide a.is-current:before, .list-hover-slide a:hover:before {
   left: 0;
+}
+
+/* ------------------------------------------------------------------- */
+/* Dashboard */
+
+table.mt-5 {
+  background-color: var(--secondary);
+}
+
+.event-headers {
+  color: var(--fourth);
+}
+
+.table {
+  color: var(--fourth);
+}
+
+.day {
+  background-color: var(--fourth);
+  color: var(--primary);
+  max-height: 10rem;
+  min-height: 7rem;
+}
+
+table .nextmonth, table .lastmonth {
+  background-color: var(--third);
+  color: var(--fourth);
+  max-height: 10rem;
+  min-height: 7rem;
+}
+
+.cal-headers {
+  background-color: var(--secondary);
 }
