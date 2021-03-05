@@ -16,6 +16,11 @@
             <input class="form-control" asp-for="LastName" placeholder="Last Name">
             <span class="text-danger" asp-validation-for="LastName"></span>
         </div>
+        <div class='input-icons'>
+            <i class="fa fa-home icon"></i>
+            <input class="form-control" asp-for="Address" placeholder= "City, State">
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div> 
         <div class="input-icons">
             <i class="fa fa-envelope icon"></i>
             <input class="form-control" asp-for="Email" placeholder="Email Address">

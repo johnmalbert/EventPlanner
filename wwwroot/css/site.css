@@ -8,9 +8,6 @@ for details on configuring this project to bundle and minify static web assets. 
   --fourth: #C9D1C8;
 }
 
-/* ------------------------------------------------------------------- */
-/* Navbar */
-
 header {
   background-color: var(--secondary);
   color: var(--fourth);

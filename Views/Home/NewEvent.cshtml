@@ -19,6 +19,11 @@
                     <span asp-validation-for="Location" class="text-danger"></span>
                 </div>
                 <div class='form-group'>
+                    <label asp-for="Description"></label>
+                    <input class="form-control" asp-for="Description" placeholder= "Please enter a brief description">
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div> 
+                <div class='form-group'>
                     <label asp-for="ScheduledAt">Date</label>
                     <input class="form-control" asp-for="ScheduledAt">
                     <span asp-validation-for="ScheduledAt" class="text-danger"></span>

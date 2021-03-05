@@ -103,7 +103,14 @@ namespace EventPlanner.Controllers
             ViewBag.Friends = FriendsOfUser;
             ViewBag.CheckLink = _context.Links.FirstOrDefault(u => u.UserId == LoggedUser().UserId && u.EventId == EventId);
             ViewBag.CurrentUser = CurrentUser;
-            ViewBag.CurrentEvent = _context.Events.Include(u => u.Guests).FirstOrDefault(e => e.EventId == EventId);
+            Event CurrentEvent = _context.Events.Include(u => u.Guests).ThenInclude(u => u.User).FirstOrDefault(e => e.EventId == EventId);
+            List<User> UsersAtEvent = new List<User>();
+            foreach(var guest in CurrentEvent.Guests){
+                User userToAdd = _context.Users.FirstOrDefault(u => u.UserId == guest.UserId);
+                UsersAtEvent.Add(userToAdd);
+            }
+            ViewBag.UsersAtEvent = UsersAtEvent;
+            ViewBag.CurrentEvent = CurrentEvent;
             return View();
         }
 

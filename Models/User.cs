@@ -20,6 +20,7 @@ namespace EventPlanner.Models
 
         //validate the address somehow
         // [AddressAttribute(ErrorMessage="Please provide a zipcode.")]
+        [Required(ErrorMessage="Please enter a valid Address")]
         [MinLength(5, ErrorMessage="Address name must be at least five characters")]
         public string Address { get; set;}
 

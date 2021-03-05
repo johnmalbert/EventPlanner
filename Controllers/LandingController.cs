@@ -46,7 +46,7 @@ namespace EventPlanner.Controllers
             {
                 if (_context.Users.Any(u => u.Email == user.Email))
                 {
-                    ModelState.AddModelError("Email", "Email is already in user");
+                    ModelState.AddModelError("Email", "Email is already in use");
                     return View("Register");
                 }
 
@@ -68,7 +68,7 @@ namespace EventPlanner.Controllers
                 var userInDb = _context.Users.FirstOrDefault(u => u.Email == userSubmission.Email);
                 if (userInDb == null)
                 {
-                    ModelState.AddModelError("Email", "Invalide Email/Password");
+                    ModelState.AddModelError("Email", "Invalid Email/Password");
                     ModelState.AddModelError("Email", "Invalid Email/Password");
                     return View("Login");
 
