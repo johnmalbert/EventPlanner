@@ -24,6 +24,8 @@ namespace EventPlanner.Models
         // public string[] Items {get;set;}
         public List<Link> Guests {get;set;}
 
+        public List<Message> Messages { get; set; }
+
         public int UserId {get;set;}
         public User Creator {get;set;}
         public List<Reminder> Reminders { get; set; }
