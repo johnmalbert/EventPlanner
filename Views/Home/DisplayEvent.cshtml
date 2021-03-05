@@ -9,6 +9,7 @@
 <h1 class="display-4 text-center">@ViewBag.CurrentEvent.Title</h1>
 <h3 class="text-center">@ViewBag.CurrentEvent.Description</h3>
 
+
 <div class="container">
     <h2>@ViewBag.CurrentEvent.Location</h2>
     <h2>@ViewBag.CurrentEvent.ScheduledAt.ToString("MM/dd/yyyy hh:mm")</h2>
@@ -64,7 +65,7 @@
         </div>
         <div class="col">
             @* list all the people that have joined *@
-            <h1>Event Guests</h1>
+            <h1>Confirmed Guests:</h1>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -80,4 +81,8 @@
             </table>
         </div>
     </div>
+    @if(ViewBag.CurrentEvent.Title.Contains("Birthday") || ViewBag.CurrentEvent.Title.Contains("birthday"))
+    {
+        <a href="/birthdaycard/@ViewBag.CurrentEvent.EventId"><button class="btn btn-primary ml-2">View the Birthday Card!</button></a>
+    }
 </div>

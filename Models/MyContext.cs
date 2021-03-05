@@ -14,7 +14,7 @@ namespace EventPlanner.Models
         public DbSet<Invite> Invites { get; set; }
         public DbSet<RequestedInvite> RequestedInvites { get; set; }
         //add events
-
+        public DbSet<Message> Messages { get; set; }
         // add other models
         
     }
