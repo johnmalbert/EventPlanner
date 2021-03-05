@@ -168,9 +168,12 @@ body {
 }
 
 img {
-  width: 25rem;
+  width: 30rem;
 }
-
+.demo {
+  width: 45%;
+  margin: 20px auto;
+}
 /* ------------------------------------------------------------------- */
 /* SideNav Bar CSS */
 
