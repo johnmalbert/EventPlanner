@@ -2,3 +2,24 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+
+$(document).ready(function() {
+    // $('.day').click(function() {
+    //     $('.table ').hide();
+    //     $('').show();
+    // });
+
+    $( ".day" ).on( "mouseenter", function() {
+        $( this ).css({
+            "background-color": "var(--secondary)",
+            "color": "var(--fourth)"
+        });
+    })
+    .on( "mouseleave", function() {
+        var styles = {
+            backgroundColor : "var(--fourth)",
+            color: "var(--primary)"
+        };
+        $( this ).css( styles );
+    });
+});

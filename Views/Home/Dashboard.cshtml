@@ -55,7 +55,7 @@
               @for(var y = 1; y<=(7-Calstart); y++)
               {
                 DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month,day);
-                <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
+                <div id="@day" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
                   <h5 class="row align-items-center">
                     <span class="date col-1">@day</span>
                     @{day++;}
@@ -86,7 +86,7 @@
               @if(day<=ViewBag.Month)
               {
                 DateTime thisDay = new DateTime(DateTime.Now.Year, DateTime.Now.Month,day);
-                <div class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
+                <div id="@day" class="day col-sm p-2 border border-left-0 border-top-0 text-truncate">
                   <h5 class="row align-items-center">
                     <span class="date col-1">@day</span>
                     @{day++;}
@@ -183,3 +183,21 @@
     }
   </tbody>
 </table>
+
+@* 
+<div class="">
+  @foreach
+  <h3></h3>
+  <table class="">
+    <thead>
+      <tr>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div> *@
