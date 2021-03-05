@@ -147,6 +147,7 @@
     <tr>
       <th scope="col">Title</th>
       <th scope="col">Date and Time</th>
+      <th scope="col">Leave/Delete Event</th>
       <th scope="col">Reminders</th>
       <th scope="col">Host</th>
     </tr>
@@ -162,6 +163,7 @@
             <tr>
                 <td><a href="event/@vent.EventId">@vent.Title</a></td>
                 <td>@vent.ScheduledAt.ToString("MMM dd, yyyy h:mm tt")</td>
+                <td><a href="/delete/@vent.EventId">Delete</a></td>
                 <td><a href="/reminder/@vent.EventId">Manage</a></td>
                 <td>@vent.Creator.FirstName</td>
             </tr>
@@ -175,6 +177,7 @@
           <tr>
             <td><a href="event/@vent.EventId">@vent.Event.Title</a></td>
             <td>@vent.Event.ScheduledAt.ToString("MMM dd, yyyy h:mm tt")</td>
+            <td><a href="/link/@vent.EventId/delete">Leave</a></td>
             <td><a href="/reminder/@vent.EventId">Manage</a></td>
             <td>@vent.Event.Creator.FirstName</td>
           </tr>
@@ -183,21 +186,3 @@
     }
   </tbody>
 </table>
-
-@* 
-<div class="">
-  @foreach
-  <h3></h3>
-  <table class="">
-    <thead>
-      <tr>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-</div> *@
