@@ -17,18 +17,18 @@
         @if(@ViewBag.CurrentUser.Address == null)
         {
             <div class="col-sm-12">
-                @* <iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=@Keys.MapsKey
+                <iframe width="100%" height="450" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps/embed/v1/place?key=@Keys.MapsKey
                     &q=@ViewBag.CurrentEvent.Location">
-                </iframe> *@
+                </iframe>
             </div>
         }
         else 
         {
             <div class="col-sm-12">
-                @* <iframe width="100%" height="450" frameborder="0" style="border:0"
+                <iframe width="100%" height="450" frameborder="0" style="border:0"
                     src="https://www.google.com/maps/embed/v1/directions?origin=@ViewBag.CurrentUser.Address&destination=@ViewBag.CurrentEvent.Location&key=@Keys.MapsKey"
                     allowfullscreen>
-                </iframe> *@
+                </iframe>
             </div>
         }
     </div>

@@ -63,7 +63,11 @@ namespace EventPlanner.Controllers
         public IActionResult FindFriend(string search){
             User searchedfor = _context.Users.FirstOrDefault(u => u.Email == search);
             if(searchedfor == null){
-                return RedirectToAction("ViewFriends");
+                ViewBag.Friends = _context.Friends.Include(u => u.User).Where(t => t.TargetId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 2);
+                ViewBag.ISent = _context.Friends.Include(u => u.User).Where(t => t.UserId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 1);
+                ViewBag.Invites = _context.Friends.Include(u => u.User).Where(t => t.TargetId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 1);
+                ViewBag.Message = $"No User exists with Email {search}!";
+                return View("ViewFriends");
             }
             Friend link = _context.Friends.FirstOrDefault(u => u.UserId == (int)HttpContext.Session.GetInt32("LoggedUser") && u.TargetId == searchedfor.UserId);
             //send a friend request via email
@@ -71,8 +75,13 @@ namespace EventPlanner.Controllers
             if(link == null){
                 SendInvite(CurrentUser, searchedfor);
                 Friend NewFriend = new Friend(){ UserId = (int)HttpContext.Session.GetInt32("LoggedUser"), TargetId = searchedfor.UserId};
+                ViewBag.Friends = _context.Friends.Include(u => u.User).Where(t => t.TargetId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 2);
+                ViewBag.ISent = _context.Friends.Include(u => u.User).Where(t => t.UserId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 1);
+                ViewBag.Invites = _context.Friends.Include(u => u.User).Where(t => t.TargetId == (int)HttpContext.Session.GetInt32("LoggedUser") && t.Status == 1);
+                ViewBag.Message = $"Email Invite sent to {search}!";
                 _context.Add(NewFriend);
                 _context.SaveChanges();
+                return View("ViewFriends");
             }
             return RedirectToAction("ViewFriends");
         }
