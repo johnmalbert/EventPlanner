@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using System.Net.Mail;  
+using System.Text;
 
 namespace EventPlanner.Controllers
 {
@@ -186,7 +188,7 @@ namespace EventPlanner.Controllers
         public IActionResult DeleteLink(int linkId)
         {
             Console.WriteLine("Delete link " + linkId);
-            Link LinkToDel = _context.Links.First(l => l.LinkId == linkId);
+            Link LinkToDel = _context.Links.FirstOrDefault(l => l.LinkId == linkId);
             _context.Remove(LinkToDel);
             _context.SaveChanges();
             return RedirectToAction("Dashboard");
@@ -197,6 +199,44 @@ namespace EventPlanner.Controllers
         {
             HttpContext.Session.Clear();
             return Redirect("/");
+        }
+        public void SendReminder(Reminder reminder)
+        {
+            MailMessage message = new MailMessage(reminder.from, reminder.to);
+            message.Subject = reminder.MesssageSubject;
+            message.Body = reminder.MessageBody;
+            message.BodyEncoding = Encoding.UTF8;
+            message.IsBodyHtml = true;
+            SmtpClient client = new SmtpClient("smtp.gmail.com", 587); //Gmail smtp    
+            System.Net.NetworkCredential basicCredential1 = new System.Net.NetworkCredential(reminder.from, reminder.PW);
+            client.EnableSsl = true;  
+            client.UseDefaultCredentials = false;  
+            client.Credentials = basicCredential1;  
+            try   
+            {  
+                client.Send(message);
+            }               
+            catch (Exception ex)
+            {  
+                Console.WriteLine(ex);
+            }
+
+        }
+        public void CheckForReminders()
+        {
+            //this function will look up each reminder that is due to be sent
+            List<Reminder> remindersToSend = _context.Reminders
+                .Include(r => r.Event)
+                .Where(r => r.TimeToSendReminder < DateTime.Now)
+                .ToList();
+                Console.WriteLine($"There are {remindersToSend.Count} to send");
+            foreach (Reminder item in remindersToSend)
+            {
+                SendReminder(item);
+                var RemToDel = _context.Reminders.First(r => r.ReminderId == item.ReminderId);
+                _context.Remove(item);
+                _context.SaveChanges();
+            }
         }
     }
 }

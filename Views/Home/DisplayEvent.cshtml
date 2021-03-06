@@ -50,7 +50,7 @@
                         {
                             @if(!@ViewBag.UsersAtEvent.Contains(user)){
                             <tr>
-                                <td>@user.FirstName @user.LastName</td>
+                                <td>@user.FirstName</td>
                                 <td><a href="/invite/@ViewBag.CurrentEvent.EventId/@user.UserId">Send invitation email</a> </td>
                             </tr>
                             }
@@ -75,7 +75,7 @@
             @foreach (var item in @ViewBag.UsersAtEvent)
             {
                 <tr>
-                    <td>@item.FirstName @item.LastName</td>
+                    <td>@item.FirstName</td>
                 </tr>
             }
             </table>
