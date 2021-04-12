@@ -1,7 +1,10 @@
 **JQZ Event Planner** -- 
 **Start planning events with a few clicks**
 
-This app was built in C# using Asp.NET. Here's how you can get it up and running: 
+This app was built in C# using Asp.NET. With dotnet installed on your machine, Here's how you can get the app  up and running: 
+
+[event_planner](https://user-images.githubusercontent.com/24249474/114450094-6eb3c780-9b8a-11eb-99af-cc5cf80cb794.gif)
+
 
 ```
  git clone https://github.com/johnmalbert/EventPlanner.git
@@ -19,7 +22,7 @@ https://dev.mysql.com/downloads/mysql/
 
 Once MySQL is installed, here's what you will need to run to connect to your database:
 
-1. Create an appsettings.json folder on the project level of the application. 
+1. Create an appsettings.json file on the project level of the application. 
 2. In appsettings.json, enter the following code, substituting your password, port (commonly 3306), and database name
 
 ```
