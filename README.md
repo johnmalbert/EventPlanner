@@ -2,8 +2,7 @@
 **Start planning events with a few clicks**
 
 This app was built in C# using Asp.NET. With dotnet installed on your machine, Here's how you can get the app  up and running: 
-
-[event_planner](https://user-images.githubusercontent.com/24249474/114450094-6eb3c780-9b8a-11eb-99af-cc5cf80cb794.gif)
+![event_planner](https://user-images.githubusercontent.com/24249474/114450168-8723e200-9b8a-11eb-82af-211a7706737e.gif)
 
 
 ```
